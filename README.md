@@ -22,7 +22,7 @@ This will install all dependencies for the bot. The dependencies are as listed b
 -py_expression_eval\
 -strawpoll.py
 
-### Setup
+## Setup
 You must generate a token for this bot in order to implement it in your server. The token must be kept secret, so it will not be included in this repo. Add the token as the only line in a .txt file name ```Token.txt``` and place it in the same directory as ```Dungeon-Master-Bot.py```
 
 ## Functions
