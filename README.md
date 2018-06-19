@@ -20,7 +20,7 @@ This will install all dependencies for the bot. The dependencies are as listed b
 -aiohttp (3.3.0-3.4.3)\
 -discord.py (1.0.0a0)\
 -py_expression_eval\
--strawpoll.py\
+-strawpoll.py
 
 ### Setup
 You must generate a token for this bot in order to implement it in your server. The token must be kept secret, so it will not be included in this repo. Add the token as the only line in a .txt file name ```Token.txt``` and place it in the same directory as ```Dungeon-Master-Bot.py```
@@ -38,7 +38,7 @@ Generates a strawpoll based on the title given and options listed. The poll will
 ```!info```\
 Provides general information about the bot.\
 ```!help```\
-Prints this menu.\
+Prints this menu.
 
 ### Author
 Jeremy Eudy
