@@ -18,7 +18,7 @@ from discord.ext.commands import Bot
 
 BOT_PREFIX = ("!")
 
-TOKEN = 'MzIxMTQ3OTQ3NDE5MDQxODA1.De7t1w.wJteQA3xi5WhAh-G7yq2W33VIH8'
+TOKEN = 'Token'
 
 client = Bot(command_prefix = BOT_PREFIX)
 
