@@ -6,10 +6,11 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/06/19 18:44:37 by jeudy2552          -------------          #
+#    Updated: 2018/06/19 21:41:23 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
+import re
 import random
 import asyncio
 import aiohttp
@@ -34,7 +35,7 @@ async def on_ready():
 
 @bot.command()
 async def info(ctx):
-    embed = discord.Embed(title="Dungeon-Master", description="Use this bot for making dice rolls, doing math, creating straw polls, or to bug Jeremy to add more features.", color=0xeee657)
+    embed = discord.Embed(title="Dungeon-Master", description="Use this bot for making dice rolls, doing math, creating straw polls, or to bug Jeremy to add more features.\nLook at the full write up with !help or on Github at https://github.com/JeremyEudy/Dungeon-Master-Bot", color=0xeee657)
     embed.add_field(name="Author", value="Fascist Stampede")
     embed.add_field(name="Server count", value=f"{len(bot.guilds)}")
     embed.add_field(name="Invite", value="https://discordapp.com/api/oauth2/authorize?client_id=458438661378277379&permissions=36849728&scope=bot")
@@ -46,8 +47,8 @@ async def help(ctx):
     embed = discord.Embed(title="Dungeon-Master", description="This bot does some stuff, here's a list:", color=0xeee657)
     embed.add_field(name="!greet", value="Greets the user", inline=False)
     embed.add_field(name="!m X + Y + Z", value="Solves a math problem of any length (addition, subtraction, multiplication, division).\nAlso able to solve more advanced math. A comprehensive list is available at https://github.com/AxiaCore/py-expression-eval", inline=False)
-    embed.add_field(name="!r # D M", value="Rolls a dice of size 'D' '#' times and adds a modifier of 'M', 'M' is optional.", inline=False)
-    embed.add_field(name="!strawpoll", value="Generates a strawpoll based on the given options. Allows more than one choice, and only one vote per user.", inline=False)
+    embed.add_field(name="!r iDj+math", value="Roll i dice with j sides, then perform arithmetic with the results.", inline=False)
+    embed.add_field(name="!strawpoll {title} [Option 1] [Option 2] [Option 3] [Option n]", value="Generates a strawpoll based on the given options. Allows more than one choice, and only one vote per user.", inline=False)
     embed.add_field(name="!info", value="Gives information about the bot.", inline=False)
     embed.add_field(name="!help", value="You're lookin' at it.", inline=False)
     await ctx.send(embed=embed)
@@ -58,46 +59,47 @@ async def greet(ctx):
 
 @bot.command()
 async def m(ctx, a: str):
+    a.replace(" ","")
     if a=="pi":
         a=a.upper()
-
     elif a=="e":
         a=a.upper()
-
     else:
         a=a.lower()
-
     parser = Parser()
     exp = parser.parse(a).evaluate({})
     exp=str(exp)
     await ctx.send(ctx.message.author.mention+": "+a+" = "+exp)
 
 @bot.command()
-async def r(ctx, a: int, b: int, c: int = 0):
+async def r(ctx, a: str):
+    parser = Parser()
+    a=a.upper()
+    a.replace(" ","")
+    a=a.split('D')
+    amt = int(a[0])
+    if amt<=0:
+        await ctx.send(ctx.message.author.mention+", that's not a valid dice amount my dude.")
+        return
+    cut = str(a[1])
+    dice = int(re.split('(\D+)', cut)[0])
+    if dice<=1:
+        await ctx.send(ctx.message.author.mention+", that's not a valid dice size my dude.")
+        return
+    math = re.split('(\D+)', cut)[1:]
+    math=''.join(math)
     roll=0
     rolls = []
     final=0
-    if b>0:
-        if a>0:
-            for x in range(0, a):
-                roll = random.randint(0, b)
-                rolls.append(str(roll))
-                final+=roll
-        else:
-            await ctx.send(ctx.message.author.mention+", you're not funny. Don't give Jeremy a headache.")
-            return
-    else:
-         await ctx.send(ctx.message.author.mention+", you're not funny. Don't give Jeremy a headache.")
-         return
+    for x in range(0, amt):
+        roll = random.randint(1, dice)
+        rolls.append(str(roll))
+        final+=roll
 
-    rolls = ' + '.join(rolls)
-    if c!=0:
-        final=str(final+a*c)
-        c=str(c)
-        await ctx.send(ctx.message.author.mention+": ("+rolls+") + "+c+" = "+final)
-    else:
-        final=str(final)
-        await ctx.send(ctx.message.author.mention+": ("+rolls+") = "+final)
+    rolls = '+'.join(rolls)
+    final = str(final)+math
+    final = str(int(parser.parse(final).evaluate({})))
+    await ctx.send(ctx.message.author.mention+": `("+rolls+")`"+math+"="+final)
 
 @bot.event
 async def on_message(message):
@@ -148,10 +150,10 @@ async def createStrawpoll(message):
 
 
     except strawpoll.errors.HTTPException:
-        return "Please make sure you are using the format '+strawpoll {title} [Option1] [Option2] [Option 3]'"
+        return "Please make sure you are using the format '!strawpoll {title} [Option1] [Option2] [Option 3]'"
 
     except KeyError:
-        return "Please make sure you are using the format '+strawpoll {title} [Option1] [Option2] [Option 3]'"
+        return "Please make sure you are using the format '!strawpoll {title} [Option1] [Option2] [Option 3]'"
 
 
 bot.run(TOKEN)
