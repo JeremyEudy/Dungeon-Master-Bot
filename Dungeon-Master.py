@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/06/19 21:41:23 by jeudy2552          -------------          #
+#    Updated: 2018/06/27 16:59:20 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,10 +28,44 @@ bot = Bot(command_prefix = BOT_PREFIX, description='A bot that does a whole host
 
 @bot.event
 async def on_ready():
-	print('Logged in as')
-	print(bot.user.name)
-	print(bot.user.id)
-	print('------')
+    print('Logged in as')
+    print(bot.user.name)
+    print(bot.user.id)
+    print('------')
+
+def rollFunction(a, i):
+    frontMath = ''
+    parser = Parser()
+    a=a.split('D', 1)
+    amt = a[0]
+    try:
+        frontMath = amt[amt.index('+')+1:]
+        amt = amt[amt.rindex('+')+1:]
+    except ValueError:
+        pass
+    if amt=='':
+        amt=1
+    a[0] = frontMath+str(amt)
+    amt = int(amt)
+    if amt<=0:
+        return "amtError"
+    cut = str(a[1])
+    dice = int(re.split('(\D+)', cut)[0])
+    if dice<=1:
+        return "diceError"
+    math = re.split('(\D+)', cut)[1:]
+    math=''.join(math)
+    if frontMath!='':
+        math=frontMath+math
+    roll=0
+    rolls = []
+    final=''
+    for x in range(0, amt):
+        roll = random.randint(1, dice)
+        rolls.append(str(roll))
+    rolls = '+'.join(rolls)
+    final = "("+rolls+")"+math
+    return final
 
 @bot.command()
 async def info(ctx):
@@ -73,33 +107,22 @@ async def m(ctx, a: str):
 
 @bot.command()
 async def r(ctx, a: str):
+    func=''
     parser = Parser()
     a=a.upper()
-    a.replace(" ","")
-    a=a.split('D')
-    amt = int(a[0])
-    if amt<=0:
-        await ctx.send(ctx.message.author.mention+", that's not a valid dice amount my dude.")
+    a=a.replace(" ","")
+    count = a.count('D')
+    for i in range(0, count):
+        func+=str(rollFunction(a, i))
+    if "amtError" in func:
+        await ctx.send(ctx.message.author.mention+", you messed up your dice amounts my dude.")
         return
-    cut = str(a[1])
-    dice = int(re.split('(\D+)', cut)[0])
-    if dice<=1:
-        await ctx.send(ctx.message.author.mention+", that's not a valid dice size my dude.")
+    if "diceError" in func:
+        await ctx.send(ctx.message.author.mention+", you messed up your dice sizes my dude.")
         return
-    math = re.split('(\D+)', cut)[1:]
-    math=''.join(math)
-    roll=0
-    rolls = []
-    final=0
-    for x in range(0, amt):
-        roll = random.randint(1, dice)
-        rolls.append(str(roll))
-        final+=roll
-
-    rolls = '+'.join(rolls)
-    final = str(final)+math
-    final = str(int(parser.parse(final).evaluate({})))
-    await ctx.send(ctx.message.author.mention+": `("+rolls+")`"+math+"="+final)
+    func=str(func)
+    final = str(int(parser.parse(func).evaluate({})))
+    await ctx.send(ctx.message.author.mention+": `("+func+")` = "+final)
 
 @bot.event
 async def on_message(message):
