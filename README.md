@@ -30,9 +30,9 @@ This bot performs an everchanging host of functions, such as:\
 ```!greet```\
 The bot responds to the user with a friendly greeting.\
 ```!m X + Y + Z```\
-The bot will perform simple to advanced math using standard operators as long as the format matches the above syntax. A comprehensive list of functions can be found here: https://github.com/AxiaCore/py-expression-eval\
-```!r # D M```\
-The bot will roll a dice '#' number of times, on a die with 'D' sides, and add an optional modifier of 'M'.\
+The bot will perform simple to advanced math using standard operators as long as the format matches the above syntax. A comprehensive list of functions can be found here: https://github.com/AxiaCore/py-expression-eval  
+```!r iDj+math```\
+Rolls i dice with j sides, and allows the user to perform arithmetic with the result.\
 ```!strawpoll {title} [Option 1] [Option 2] [Option 3] [Option n]```\
 Generates a strawpoll based on the title given and options listed. The poll will allow users to pick multiple options, and limits the poll to one vote per user by default.\
 ```!info```\
