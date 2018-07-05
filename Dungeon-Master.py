@@ -1,4 +1,4 @@
-# **************************************************************************** #
+#**************************************************************************** #
 #                                                                              #
 #                                                             |\               #
 #    Dungeon-Master.py                                  ------| \----          #
@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/06/27 16:59:20 by jeudy2552          -------------          #
+#    Updated: 2018/07/04 20:17:28 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ async def on_ready():
 def rollFunction(a, i):
     frontMath = ''
     parser = Parser()
+    a.replace(" ", "")
     a=a.split('D', 1)
     amt = a[0]
     try:
@@ -107,10 +108,10 @@ async def m(ctx, a: str):
 
 @bot.command()
 async def r(ctx, a: str):
-    func=''
+    func=0
     parser = Parser()
     a=a.upper()
-    a=a.replace(" ","")
+    a.replace(" ","")
     count = a.count('D')
     for i in range(0, count):
         func+=str(rollFunction(a, i))
