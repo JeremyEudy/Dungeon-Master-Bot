@@ -106,6 +106,7 @@ async def suggest(ctx, *args):
     if counter >= 10:
         await ctx.send("I think you've submitted enough suggestions for right now... Try again later.")
     else:
+        await ctx.send("Thank you for your suggestion!")
         file.write(ctx.message.author.mention+": "+suggestion)
     file.close()
 
