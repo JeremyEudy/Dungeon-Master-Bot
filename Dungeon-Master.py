@@ -95,17 +95,18 @@ async def greet(ctx):
 	await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention)
 
 @bot.command()
-async def suggest(ctx, a: str):
+async def suggest(ctx, *args):
     counter = 0
+    suggestion = '{}'.format(' '.join(args))
     server = str(ctx.guild.name)
     suggestionFile = server+"_SuggestionBox.txt"
     file = open(suggestionFile, "a+")
     for line in file:
-        if ctx.message.author in line: counter+=1
+        if ctx.message.author.mention in line: counter+=1
     if counter >= 10:
         await ctx.send("I think you've submitted enough suggestions for right now... Try again later.")
     else:
-        file.write(ctx.message.author+": "+a)
+        file.write(ctx.message.author.mention+": "+suggestion)
     file.close()
 
 @bot.command()
