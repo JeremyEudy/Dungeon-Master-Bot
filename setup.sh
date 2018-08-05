@@ -17,3 +17,5 @@ sudo python3.6 -m pip install py_expression_eval
 sudo python3.6 -m pip install -U https://github.com/Rapptz/discord.py/archive/rewrite.zip
 sudo python3.6 -m pip install strawpoll.py
 sudo python3.6 -m pip install asyncio
+sudo python3.6 -m pip install --upgrade youtube-dl
+sudo python3.6 -m pip install opuslib

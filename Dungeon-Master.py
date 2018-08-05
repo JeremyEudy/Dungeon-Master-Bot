@@ -19,6 +19,7 @@ import discord
 from discord.ext.commands import Bot
 import strawpoll
 import requests
+import youtube_dl
 
 BOT_PREFIX = ("!")
 f = open('Token.txt', 'r')
@@ -73,7 +74,7 @@ def rollFunction(a, i):
 async def info(ctx):
     embed = discord.Embed(title="Dungeon-Master", description="Use this bot for making dice rolls, doing math, creating straw polls, answering questions, or to bug Jeremy to add more features.\nLook at the full write up with !help or on Github at https://github.com/JeremyEudy/Dungeon-Master-Bot", color=0xeee657)
     embed.add_field(name="Author", value="Fascist Stampede")
-    embed.add_field(name="Server count", value=f"{len(bot.guilds)}")
+    embed.add_field(name="Server count", value="{len(bot.guilds)}")
     embed.add_field(name="Invite", value="https://discordapp.com/api/oauth2/authorize?client_id=458438661378277379&permissions=36849728&scope=bot")
     await ctx.send(embed=embed)
 
@@ -110,7 +111,16 @@ async def suggest(ctx, *args):
         await ctx.send("Thank you for your suggestion!")
         file.write(ctx.message.author.mention+": "+suggestion)
     file.close()
+'''
+@bot.command()
+async def play(ctx, url):
+    author = ctx.message.author
+    voice_channel = author.voice_channel
+    vc = await yield from self.join_voice_channel(voice_channel)
 
+    player = await vc.create_ytdl_player(url)
+    player.start()
+'''
 @bot.command()
 async def m(ctx, *args):
     a = '{}'.format(''.join(args))
