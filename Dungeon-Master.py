@@ -23,6 +23,7 @@ import requests
 BOT_PREFIX = ("!")
 f = open('Token.txt', 'r')
 TOKEN = f.read().rstrip()
+f.close()
 
 bot = Bot(command_prefix = BOT_PREFIX, description='A bot that does a whole host of things that Jeremy works on in his free time.')
 
@@ -96,9 +97,9 @@ async def greet(ctx):
 @bot.command()
 async def suggest(ctx, a: str):
     counter = 0
-    server = str(discord.Server.name)
+    server = str(ctx.guild.name)
     suggestionFile = server+"_SuggestionBox.txt"
-    file = open(suggestionFile, "r+")
+    file = open(suggestionFile, "a+")
     for line in file:
         if ctx.message.author in line: counter+=1
     if counter >= 10:
