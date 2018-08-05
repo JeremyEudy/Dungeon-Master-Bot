@@ -85,7 +85,7 @@ async def help(ctx):
     embed.add_field(name="!greet", value="Greets the user", inline=False)
     embed.add_field(name="!m X + Y + Z", value="Solves a math problem of any length (addition, subtraction, multiplication, division).\nAlso able to solve more advanced math. A comprehensive list is available at https://github.com/AxiaCore/py-expression-eval", inline=False)
     embed.add_field(name="!r iDj+math", value="Roll i dice with j sides, then perform arithmetic with the results.", inline=False)
-    embed.add_field(name="!eightball *question*", value="Ask the bot a yes/no question that it will answer with advanced machine learning (or random choices).", inline=False)
+    embed.add_field(name="!8ball *question*", value="Ask the bot a yes/no question that it will answer with advanced machine learning (or random choices).", inline=False)
     embed.add_field(name="!strawpoll {title} [Option 1] [Option 2] [Option 3] [Option n]", value="Generates a strawpoll based on the given options. Allows more than one choice, and only one vote per user.", inline=False)
     embed.add_field(name="!suggest *suggestion*", value="Submit a suggestion to a suggestion box. Jeremy checks the box once a week.", inline=False)
     embed.add_field(name="!info", value="Gives information about the bot.", inline=False)
@@ -154,7 +154,7 @@ async def r(ctx, *args):
     final = str(int(parser.parse(func).evaluate({})))
     await ctx.send(ctx.message.author.mention+": `"+func+"` = "+final)
 
-@bot.command()
+@bot.command(name='8ball', description="Answers a yes/no question.", aliases=['eightball', '8-ball', 'eight_ball'], pass_context=True)
 async def eightball(ctx, *args):
     a = '{}'.format(' '.join(args))
     responses = ["It is certain.", "As I see it, yes.", "It is decidedly so.", "Without a doubt.", 
@@ -162,7 +162,7 @@ async def eightball(ctx, *args):
                  "Signs point to yes.", "Reply hazy, try again.", "Ask again later.", "Better not tell you now.", 
                  "Cannot predict now.", "Concentrate and ask again.", "Don't count on it.", "My reply is no.", 
                  "My sources say no.", "Outlook not so good.", "Very doubtful."]
-    choice = random.randint(1, len(responses))
+    choice = random.randint(0, len(responses)-1)
     await ctx.send(ctx.message.author.mention+": "+responses[choice])
 
 @bot.event
