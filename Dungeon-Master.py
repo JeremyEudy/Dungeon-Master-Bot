@@ -105,7 +105,7 @@ async def suggest(ctx, a: str):
     if counter >= 10:
         await ctx.send("I think you've submitted enough suggestions for right now... Try again later.")
     else:
-        file.write(a)
+        file.write(ctx.message.author+": "+a)
     file.close()
 
 @bot.command()
