@@ -85,7 +85,7 @@ async def help(ctx):
     embed.add_field(name="!greet", value="Greets the user", inline=False)
     embed.add_field(name="!m X + Y + Z", value="Solves a math problem of any length (addition, subtraction, multiplication, division).\nAlso able to solve more advanced math. A comprehensive list is available at https://github.com/AxiaCore/py-expression-eval", inline=False)
     embed.add_field(name="!r iDj+math", value="Roll i dice with j sides, then perform arithmetic with the results.", inline=False)
-    embed.add_field(name="!eightball *question*", value="Ask the bot a yes/no question that it will answer with advance machine learning.", inline=False)
+    embed.add_field(name="!eightball *question*", value="Ask the bot a yes/no question that it will answer with advanced machine learning (or random choices).", inline=False)
     embed.add_field(name="!strawpoll {title} [Option 1] [Option 2] [Option 3] [Option n]", value="Generates a strawpoll based on the given options. Allows more than one choice, and only one vote per user.", inline=False)
     embed.add_field(name="!suggest *suggestion*", value="Submit a suggestion to a suggestion box. Jeremy checks the box once a week.", inline=False)
     embed.add_field(name="!info", value="Gives information about the bot.", inline=False)
