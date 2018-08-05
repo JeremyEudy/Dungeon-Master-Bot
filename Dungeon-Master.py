@@ -85,7 +85,7 @@ async def help(ctx):
     embed.add_field(name="!m X + Y + Z", value="Solves a math problem of any length (addition, subtraction, multiplication, division).\nAlso able to solve more advanced math. A comprehensive list is available at https://github.com/AxiaCore/py-expression-eval", inline=False)
     embed.add_field(name="!r iDj+math", value="Roll i dice with j sides, then perform arithmetic with the results.", inline=False)
     embed.add_field(name="!strawpoll {title} [Option 1] [Option 2] [Option 3] [Option n]", value="Generates a strawpoll based on the given options. Allows more than one choice, and only one vote per user.", inline=False)
-    embed.add_field(name="!suggest ____", value="Submit a suggestion to a suggestion box. Jeremy check the box once a week.", inline=False)
+    embed.add_field(name="!suggest ___________", value="Submit a suggestion to a suggestion box. Jeremy checks the box once a week.", inline=False)
     embed.add_field(name="!info", value="Gives information about the bot.", inline=False)
     embed.add_field(name="!help", value="You're lookin' at it.", inline=False)
     await ctx.send(embed=embed)
@@ -111,8 +111,8 @@ async def suggest(ctx, *args):
     file.close()
 
 @bot.command()
-async def m(ctx, a: str):
-    a.replace(" ","")
+async def m(ctx, *args):
+    a = '{}'.format(''.join(args))
     if a=="pi":
         a=a.upper()
     elif a=="e":
@@ -125,11 +125,11 @@ async def m(ctx, a: str):
     await ctx.send(ctx.message.author.mention+": "+a+" = "+exp)
 
 @bot.command()
-async def r(ctx, a: str):
-    func=0
+async def r(ctx, *args):
+    a = '{}'.format(''.join(args))
+    func=""
     parser = Parser()
     a=a.upper()
-    a.replace(" ","")
     count = a.count('D')
     for i in range(0, count):
         func+=str(rollFunction(a, i))
@@ -141,7 +141,7 @@ async def r(ctx, a: str):
         return
     func=str(func)
     final = str(int(parser.parse(func).evaluate({})))
-    await ctx.send(ctx.message.author.mention+": `("+func+")` = "+final)
+    await ctx.send(ctx.message.author.mention+": `"+func+"` = "+final)
 
 @bot.event
 async def on_message(message):
