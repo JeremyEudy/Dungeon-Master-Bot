@@ -71,7 +71,7 @@ def rollFunction(a, i):
 
 @bot.command()
 async def info(ctx):
-    embed = discord.Embed(title="Dungeon-Master", description="Use this bot for making dice rolls, doing math, creating straw polls, or to bug Jeremy to add more features.\nLook at the full write up with !help or on Github at https://github.com/JeremyEudy/Dungeon-Master-Bot", color=0xeee657)
+    embed = discord.Embed(title="Dungeon-Master", description="Use this bot for making dice rolls, doing math, creating straw polls, answering questions, or to bug Jeremy to add more features.\nLook at the full write up with !help or on Github at https://github.com/JeremyEudy/Dungeon-Master-Bot", color=0xeee657)
     embed.add_field(name="Author", value="Fascist Stampede")
     embed.add_field(name="Server count", value=f"{len(bot.guilds)}")
     embed.add_field(name="Invite", value="https://discordapp.com/api/oauth2/authorize?client_id=458438661378277379&permissions=36849728&scope=bot")
@@ -84,6 +84,7 @@ async def help(ctx):
     embed.add_field(name="!greet", value="Greets the user", inline=False)
     embed.add_field(name="!m X + Y + Z", value="Solves a math problem of any length (addition, subtraction, multiplication, division).\nAlso able to solve more advanced math. A comprehensive list is available at https://github.com/AxiaCore/py-expression-eval", inline=False)
     embed.add_field(name="!r iDj+math", value="Roll i dice with j sides, then perform arithmetic with the results.", inline=False)
+    embed.add_field(name="!eightball *question*", value="Ask the bot a yes/no question that it will answer with advance machine learning.", inline=False)
     embed.add_field(name="!strawpoll {title} [Option 1] [Option 2] [Option 3] [Option n]", value="Generates a strawpoll based on the given options. Allows more than one choice, and only one vote per user.", inline=False)
     embed.add_field(name="!suggest *suggestion*", value="Submit a suggestion to a suggestion box. Jeremy checks the box once a week.", inline=False)
     embed.add_field(name="!info", value="Gives information about the bot.", inline=False)
@@ -142,6 +143,17 @@ async def r(ctx, *args):
     func=str(func)
     final = str(int(parser.parse(func).evaluate({})))
     await ctx.send(ctx.message.author.mention+": `"+func+"` = "+final)
+
+@bot.command()
+async def eightball(ctx, *args):
+    a = '{}'.format(' '.join(args))
+    responses = ["It is certain.", "As I see it, yes.", "It is decidedly so.", "Without a doubt.", 
+                 "Outlook good.", "Most likely", "Yes.", "Yes - definitely.", "You may rely on it.", 
+                 "Signs point to yes.", "Reply hazy, try again.", "Ask again later.", "Better not tell you now.", 
+                 "Cannot predict now.", "Concentrate and ask again.", "Don't count on it.", "My reply is no.", 
+                 "My sources say no.", "Outlook not so good.", "Very doubtful."]
+    choice = random.randint(1, len(responses))
+    await ctx.send(ctx.message.author.mention+": "+responses[choice])
 
 @bot.event
 async def on_message(message):
