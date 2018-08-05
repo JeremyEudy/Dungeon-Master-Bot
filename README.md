@@ -35,7 +35,7 @@ The bot responds to the user with a friendly greeting.\
 The bot will perform simple to advanced math using standard operators as long as the format matches the above syntax. A comprehensive list of functions can be found here: https://github.com/AxiaCore/py-expression-eval  
 ```!r iDj+math```\
 Rolls i dice with j sides, and allows the user to perform arithmetic with the result.\
-```!eightball *question*```\
+```!8ball *question*```\
 Ask the bot a yes/no question that it will answer with advanced machine learning (or random choices).\
 ```!strawpoll {title} [Option 1] [Option 2] [Option 3] [Option n]```\
 Generates a strawpoll based on the title given and options listed. The poll will allow users to pick multiple options, and limits the poll to one vote per user by default.\
