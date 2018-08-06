@@ -20,6 +20,7 @@ from discord.ext.commands import Bot
 import strawpoll
 import requests
 import youtube_dl
+import json
 
 BOT_PREFIX = ("!")
 f = open('Token.txt', 'r')
@@ -123,6 +124,37 @@ async def suggest(ctx, *args):
         await ctx.send("Thank you for your suggestion!")
         file.write(ctx.message.author.mention+": "+suggestion)
     file.close()
+
+'''TODO: Fix this
+@bot.command()
+async def tdh(ctx, *args):
+    date = '{}'.format(''.join(args))
+    url=''
+    if date == '':
+        url = "http://history.muffinlabs.com/date/"
+        response = requests.get(url)
+        data = response.json()
+        embed = discord.Embed(title="This Day in History: "+date, description="Here's what happened.", color=0xeee657)
+        embed.add_field(name="Events:", value=data['data']['Events'][0]['text'], inline=False)
+        embed.add_field(name="Births:", value=data['data']['Births'][0]['text'], inline=False)
+        embed.add_field(name="Deaths:", value=data['data']['Deaths'][0]['text'], inline=False)
+        embed.add_field(name="Wikipedia Link:", value=data['url'], inline=False)
+        await ctx.send(embed=embed)
+    else:
+        if re.match(r"[0-9]+/[0-9]+", date):
+            url = "http://history.muffinlabs.com/date/"+date
+            response = requests.get(url)
+            data = json.loads(response.text)
+            embed = discord.Embed(title="This Day in History: "+date, description="Here's what happened.", color=0xeee657)
+            embed.add_field(name="Events:", value=data['data']['Events'][0]['text'], inline=False)
+            embed.add_field(name="Births:", value=data['data']['Births'][0]['text'], inline=False)
+            embed.add_field(name="Deaths:", value=data['data']['Deaths'][0]['text'], inline=False)
+            embed.add_field(name="Wikipedia Link:", value=data['url'], inline=False)
+            await ctx.send(embed=embed)
+        else:
+            await ctx.send(ctx.message.author.mention+", please use the correct date format: 'mm/dd'")
+'''
+    
 '''
 @bot.command()
 async def play(ctx, url):
