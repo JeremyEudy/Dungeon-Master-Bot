@@ -83,6 +83,7 @@ bot.remove_command('help')
 async def help(ctx):
     embed = discord.Embed(title="Dungeon-Master", description="This bot does some stuff, here's a list:", color=0xeee657)
     embed.add_field(name="!greet", value="Greets the user", inline=False)
+    embed.add_field(name="!sponge", value="SpOnGe", inline=False)
     embed.add_field(name="!m X + Y + Z", value="Solves a math problem of any length (addition, subtraction, multiplication, division).\nAlso able to solve more advanced math. A comprehensive list is available at https://github.com/AxiaCore/py-expression-eval", inline=False)
     embed.add_field(name="!r iDj+math", value="Roll i dice with j sides, then perform arithmetic with the results.", inline=False)
     embed.add_field(name="!8ball *question*", value="Ask the bot a yes/no question that it will answer with advanced machine learning (or random choices).", inline=False)
@@ -95,6 +96,17 @@ async def help(ctx):
 @bot.command()
 async def greet(ctx):
 	await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention)
+
+@bot.command()
+async def sponge(ctx, *args):
+    text = '{}'.format(' '.join(args))
+    text = list(text)
+    for i in range(0, len(text)):
+        if i%2:
+            text[i]=text[i].upper()
+        else:
+            text[i]=text[i].lower()
+    await ctx.send(ctx.message.author.mention+": "+''.join(text))
 
 @bot.command()
 async def suggest(ctx, *args):
