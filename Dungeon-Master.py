@@ -1,4 +1,4 @@
-#**************************************************************************** #
+# **************************************************************************** #
 #                                                                              #
 #                                                             |\               #
 #    Dungeon-Master.py                                  ------| \----          #
@@ -143,9 +143,12 @@ async def m(ctx, *args):
     else:
         a=a.lower()
     parser = Parser()
-    exp = parser.parse(a).evaluate({})
-    exp=str(exp)
-    await ctx.send(ctx.message.author.mention+": "+a+" = "+exp)
+    if a.find("/0") == -1:
+        exp = parser.parse(a).evaluate({})
+        exp=str(exp)
+        await ctx.send(ctx.message.author.mention+": "+a+" = "+exp)
+    else:
+        await ctx.send(ctx.message.author.mention+" don't divide by 0!")
 
 @bot.command()
 async def r(ctx, *args):
