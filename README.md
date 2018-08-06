@@ -31,6 +31,8 @@ You must generate a token for this bot in order to implement it in your server. 
 This bot performs an everchanging host of functions, such as:\
 ```!greet```\
 The bot responds to the user with a friendly greeting.\
+```!sponge *string*```\
+sTrInG\
 ```!m X + Y + Z```\
 The bot will perform simple to advanced math using standard operators as long as the format matches the above syntax. A comprehensive list of functions can be found here: https://github.com/AxiaCore/py-expression-eval  
 ```!r iDj+math```\
