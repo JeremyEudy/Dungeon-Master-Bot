@@ -11,6 +11,7 @@
 # **************************************************************************** #
 
 import re
+import operator as op
 import random
 import asyncio
 import aiohttp
@@ -20,6 +21,7 @@ from discord.ext.commands import Bot
 import strawpoll
 import requests
 import youtube_dl
+from roller import *
 
 BOT_PREFIX = ("!")
 f = open('Token.txt', 'r')
@@ -28,6 +30,55 @@ f.close()
 
 bot = Bot(command_prefix = BOT_PREFIX, description='A bot that does a whole host of things that Jeremy works on in his free time.')
 
+british_insults = ['Tosser',
+ 'Wanker',
+ 'Slag',
+ 'No better than those Cheese Eating Surrender Monkeys',
+ 'Someone has Lost the plot.',
+ 'Daft Cow',
+ 'Arsehole',
+ 'Barmy',
+ 'Chav',
+ 'Dodgy',
+ 'Manky',
+ 'Minger',
+ 'Muppet',
+ 'Naff',
+ 'Nutter',
+ 'Pikey',
+ 'Pillock',
+ 'Plonker',
+ 'Prat',
+ 'Scrubber',
+ 'Trollop',
+ 'Uphill Gardener',
+ 'Twit',
+ 'Knob Head',
+ 'Piss Off',
+ 'Bell End',
+ 'Lazy Sod',
+ 'Skiver',
+ 'Knob Gobbler',
+ 'Wazzock',
+ 'Ninny',
+ 'Berk',
+ 'Airy-fairy',
+ 'Ankle-biter',
+ 'Arse-licker',
+ 'Arsemonger',
+ 'Chuffer',
+ 'You are Daft as a bush',
+ "This one's Dead from the neck up",
+ 'Clearly your brain has gone to the dogs',
+ 'Ligger',
+ 'You are Like a dog with two dicks',
+ 'Mad as a bag of ferrets',
+ 'Maggot',
+ 'What a Mingebag',
+ "This one's not Not batting on a full wicket",
+ 'You are Plug-Ugly',
+ ]
+
 @bot.event
 async def on_ready():
     print('Logged in as')
@@ -35,46 +86,11 @@ async def on_ready():
     print(bot.user.id)
     print('------')
 
-def rollFunction(a, i):
-    frontMath = ''
-    parser = Parser()
-    a.replace(" ", "")
-    a=a.split('D', 1)
-    amt = a[0]
-    try:
-        frontMath = amt[amt.index('+')+1:]
-        amt = amt[amt.rindex('+')+1:]
-    except ValueError:
-        pass
-    if amt=='':
-        amt=1
-    a[0] = frontMath+str(amt)
-    amt = int(amt)
-    if amt<=0:
-        return "amtError"
-    cut = str(a[1])
-    dice = int(re.split('(\D+)', cut)[0])
-    if dice<=1:
-        return "diceError"
-    math = re.split('(\D+)', cut)[1:]
-    math=''.join(math)
-    if frontMath!='':
-        math=frontMath+math
-    roll=0
-    rolls = []
-    final=''
-    for x in range(0, amt):
-        roll = random.randint(1, dice)
-        rolls.append(str(roll))
-    rolls = '+'.join(rolls)
-    final = "("+rolls+")"+math
-    return final
-
 @bot.command()
 async def info(ctx):
     embed = discord.Embed(title="Dungeon-Master", description="Use this bot for making dice rolls, doing math, creating straw polls, answering questions, or to bug Jeremy to add more features.\nLook at the full write up with !help or on Github at https://github.com/JeremyEudy/Dungeon-Master-Bot", color=0xeee657)
     embed.add_field(name="Author", value="Fascist Stampede")
-    embed.add_field(name="Server count", value="{len(bot.guilds)}")
+    embed.add_field(name="Server count", value=len(bot.guilds))
     embed.add_field(name="Invite", value="https://discordapp.com/api/oauth2/authorize?client_id=458438661378277379&permissions=36849728&scope=bot")
     await ctx.send(embed=embed)
 
@@ -134,6 +150,7 @@ async def play(ctx, url):
     player = await vc.create_ytdl_player(url)
     player.start()
 '''
+
 @bot.command()
 async def m(ctx, *args):
     a = '{}'.format(''.join(args))
@@ -154,21 +171,17 @@ async def m(ctx, *args):
 @bot.command()
 async def r(ctx, *args):
     a = '{}'.format(''.join(args))
-    func=""
-    parser = Parser()
-    a=a.upper()
-    count = a.count('D')
-    for i in range(0, count):
-        func+=str(rollFunction(a, i))
-    if "amtError" in func:
-        await ctx.send(ctx.message.author.mention+", you messed up your dice amounts my dude.")
-        return
-    if "diceError" in func:
-        await ctx.send(ctx.message.author.mention+", you messed up your dice sizes my dude.")
-        return
-    func=str(func)
-    final = str(int(parser.parse(func).evaluate({})))
-    await ctx.send(ctx.message.author.mention+": `"+func+"` = "+final)
+    ops = ['+','-','*','/']
+    a = a.replace(' ','')
+    for op in ops:
+        a = a.replace(op, ' {} '.format(op))
+    a = a.split(' ')
+    a = ' '.join([str(item) for item in transmogrifier(a)])
+    b = str(a)
+    try:
+        await ctx.send(ctx.message.author.mention+": `"+b+"` = "+str(eval(a)))
+    except Exception as e:
+        await ctx.send(ctx.message.author.mention+": "+random.choice(british_insults))
 
 @bot.command(name='8ball', description="Answers a yes/no question.", aliases=['eightball', '8-ball', 'eight_ball'], pass_context=True)
 async def eightball(ctx, *args):

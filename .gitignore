@@ -5,3 +5,9 @@ Token.txt
 # Suggestions #
 #######################
 *.txt
+
+# Other files #
+#######################
+roller.py
+Dice-Roller/
+__pycache__/
