@@ -114,6 +114,20 @@ async def greet(ctx):
 	await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention)
 
 @bot.command()
+async def defaultRole(ctx, *args):
+	text = '{}'.format(' '.join(args))
+	server = str(ctx.guild.name)
+	fileInfo = server+"_CustomData.txt"
+	f = open(fileInfo, "a+")
+	data = f.readlines()
+	if text in f.read():
+		await ctx.send("This role is already set as the default role.")
+	else if "Default role = " in f.read():
+		await ctx.send("There is already a default role set. Overwriting...")
+		
+	
+
+@bot.command()
 async def sponge(ctx, *args):
     text = '{}'.format(' '.join(args))
     text = list(text)
