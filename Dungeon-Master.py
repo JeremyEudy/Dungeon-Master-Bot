@@ -101,7 +101,7 @@ async def help(ctx):
     embed.add_field(name="!greet", value="Greets the user", inline=False)
     embed.add_field(name="!sponge", value="SpOnGe", inline=False)
     embed.add_field(name="!m X + Y + Z", value="Solves a math problem of any length (addition, subtraction, multiplication, division).\nAlso able to solve more advanced math. A comprehensive list is available at https://github.com/AxiaCore/py-expression-eval", inline=False)
-    embed.add_field(name="!r iDj+math", value="Roll i dice with j sides, then perform arithmetic with the results.", inline=False)
+    embed.add_field(name="!r iDj+math", value="Roll i dice with j sides, then perform arithmetic with the results.\nCredit for this function goes to Will Irwin (Upgwades) https://github.com/Upgwades", inline=False)
     embed.add_field(name="!8ball *question*", value="Ask the bot a yes/no question that it will answer with advanced machine learning (or random choices).", inline=False)
     embed.add_field(name="!strawpoll {title} [Option 1] [Option 2] [Option 3] [Option n]", value="Generates a strawpoll based on the given options. Allows more than one choice, and only one vote per user.", inline=False)
     embed.add_field(name="!suggest *suggestion*", value="Submit a suggestion to a suggestion box. Jeremy checks the box once a week.", inline=False)
@@ -112,6 +112,18 @@ async def help(ctx):
 @bot.command()
 async def greet(ctx):
 	await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention)
+'''TODO: Fix the file writing methods. Still says "index out of bounds"
+@bot.command()
+async def on_member_join(ctx, member):
+	await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention+", welcome to the server.")
+	server = str(ctx.guild.name)
+	fileInfo = server+"_CustomData.txt"
+	f = open(fileInfo, "a+")
+	data = f.read()
+	roleID = data[1]
+	role = discord.utils.get(member.server.roles ,id=roleID)
+	await bot.add_roles(member, role)
+	f.close()
 
 @bot.command()
 async def defaultRole(ctx, *args):
@@ -119,14 +131,19 @@ async def defaultRole(ctx, *args):
 	server = str(ctx.guild.name)
 	fileInfo = server+"_CustomData.txt"
 	f = open(fileInfo, "a+")
-	data = f.readlines()
-	if text in f.read():
+	data = f.read()
+	if text in data:
 		await ctx.send("This role is already set as the default role.")
-	else if "Default role = " in f.read():
+	elif "Default role = " in f.read():
 		await ctx.send("There is already a default role set. Overwriting...")
+		data[0] = "Default role = "+text+"\\n"
 		
-	
-
+		await ctx.send("Default role set to '"+text+"'.")
+	else:
+		data[0] = "Default role = "+text+"\\n"
+		await ctx.send("Default role set to '"+text+"'.")
+	f.close()
+'''
 @bot.command()
 async def sponge(ctx, *args):
     text = '{}'.format(' '.join(args))
@@ -144,15 +161,15 @@ async def suggest(ctx, *args):
     suggestion = '{}'.format(' '.join(args))
     server = str(ctx.guild.name)
     suggestionFile = server+"_SuggestionBox.txt"
-    file = open(suggestionFile, "a+")
-    for line in file:
+    f = open(suggestionFile, "a+")
+    for line in f:
         if ctx.message.author.mention in line: counter+=1
     if counter >= 10:
         await ctx.send("I think you've submitted enough suggestions for right now... Try again later.")
     else:
         await ctx.send("Thank you for your suggestion!")
-        file.write(ctx.message.author.mention+": "+suggestion)
-    file.close()
+        f.write(ctx.message.author.mention+": "+suggestion)
+    f.close()
 
 '''
 @bot.command()
