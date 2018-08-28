@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/27 21:16:03 by jeudy2552          -------------          #
+#    Updated: 2018/08/27 21:21:55 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -141,17 +141,14 @@ async def greet(ctx):
 	await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention)
 
 @bot.command()
-@commands.check()
+@commands.check(check_if_it_is_me)
 async def on_member_join(ctx, member):
     await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention+", welcome to the server.")
     server = str(ctx.guild.name)
     fileInfo = server+"_CustomData.txt"
     f = open(fileInfo, "a+")
-    data = f.read()
-    roleID = ''
-    for i, line in enumerate(data):
-        if i == 1:
-            roleID = line.strip()
+    data = f.readlines()
+    roleID = data[1]
     role = discord.utils.get(member.server.roles ,id=roleID)
     await bot.add_roles(member, role)
     f.close()
@@ -163,22 +160,18 @@ async def defaultRole(ctx, *args):
     server = str(ctx.guild.name)
     fileInfo = server+"_CustomData.txt"
     f = open(fileInfo, "a+")
-    data = f.read()
-    role = ''
+    data = f.readlines()
+    role = data[0]
     roleString = "Default role = "
-    for i, line in enumerate(data):
-        if i == 0:
-            role = line.strip()
     if text in data:
         await ctx.send("This role is already set as the default role.")
     elif roleString in data:
         await ctx.send("There is already a default role set. Overwriting...")
-        data[0] = "Default role = "+text+"\\n"
-        
+        role = "Default role = "+text+"\\n"
+
         await ctx.send("Default role set to '"+text+"'.")
-    elif 
     else:
-        data[0] = "Default role = "+text+"\\n"
+        role = "Default role = "+text+"\\n"
         await ctx.send("Default role set to '"+text+"'.")
     f.close()
 
