@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/28 08:33:22 by jeudy2552          -------------          #
+#    Updated: 2018/08/28 08:34:21 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,7 +118,7 @@ def check_if_it_is_me(ctx):
 
 @bot.command()
 @commands.check(check_if_it_is_me)
-async def announce(ctx, discord, *args):
+async def announce(ctx, *args):
     text = '{}'.format(' '.join(args))
     front = text.find("{")+1
     back = text.find("}")
