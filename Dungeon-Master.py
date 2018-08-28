@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/27 22:08:54 by jeudy2552          -------------          #
+#    Updated: 2018/08/27 22:13:28 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,9 +118,9 @@ def check_if_it_is_me(ctx):
 
 @bot.command()
 @commands.check(check_if_it_is_me)
-async def announce(ctx, guild, *args):
+async def announce(ctx, server, *args):
     textChannels = []
-    for channel in guild.channels:
+    for channel in channels:
         if channel.type == 'Text':
             textChannel.append(channel)
     text = '{}'.format(' '.join(args))
@@ -304,12 +304,10 @@ async def createStrawpoll(message):
         json = r.json()
         return "https://strawpoll.me/" + str(json["id"])
 
-
     except strawpoll.errors.HTTPException:
         return "Please make sure you are using the format '!strawpoll {title} [Option1] [Option2] [Option 3]'"
 
     except KeyError:
         return "Please make sure you are using the format '!strawpoll {title} [Option1] [Option2] [Option 3]'"
-
 
 bot.run(TOKEN)
