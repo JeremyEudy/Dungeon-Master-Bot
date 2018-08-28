@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/27 21:46:56 by jeudy2552          -------------          #
+#    Updated: 2018/08/27 21:49:25 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -112,13 +112,13 @@ async def help(ctx):
 
 def check_if_it_is_me(ctx):
     f = open("YourID.txt", "r")
-    ID = int(f.read().rstrip())
+    ID = f.read().rstrip()
     f.close()
-    return ID
+    return ID == ctx.author.id
 
 @bot.command()
 @commands.check(check_if_it_is_me)
-async def announce(ctx, a):
+async def announce(ctx, *args):
     text = '{}'.format(' '.join(args))
     front = a.find("[")
     back = a.find("]")
