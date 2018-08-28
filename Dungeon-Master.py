@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/27 21:14:42 by jeudy2552          -------------          #
+#    Updated: 2018/08/27 21:16:03 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -165,13 +165,13 @@ async def defaultRole(ctx, *args):
     f = open(fileInfo, "a+")
     data = f.read()
     role = ''
+    roleString = "Default role = "
     for i, line in enumerate(data):
         if i == 0:
             role = line.strip()
     if text in data:
         await ctx.send("This role is already set as the default role.")
-    roleString = "Default role = "
-    elif roleString in f.read():
+    elif roleString in data:
         await ctx.send("There is already a default role set. Overwriting...")
         data[0] = "Default role = "+text+"\\n"
         
