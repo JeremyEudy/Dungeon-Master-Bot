@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/28 09:25:35 by jeudy2552          -------------          #
+#    Updated: 2018/08/28 18:53:17 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,15 +100,15 @@ bot.remove_command('help')
 @bot.command()
 async def help(ctx):
     embed = discord.Embed(title="Dungeon-Master", description="This bot does some stuff, here's a list:", color=0xeee657)
-    embed.add_field(name="!greet", value="Greets the user", inline=False)
-    embed.add_field(name="!sponge", value="SpOnGe", inline=False)
-    embed.add_field(name="!m X + Y + Z", value="Solves a math problem of any length (addition, subtraction, multiplication, division).\nAlso able to solve more advanced math. A comprehensive list is available at https://github.com/AxiaCore/py-expression-eval", inline=False)
-    embed.add_field(name="!r iDj+math", value="Roll i dice with j sides, then perform arithmetic with the results.\nCredit for this function goes to Will Irwin (Upgwades) https://github.com/Upgwades", inline=False)
-    embed.add_field(name="!8ball *question*", value="Ask the bot a yes/no question that it will answer with advanced machine learning (or random choices).", inline=False)
-    embed.add_field(name="!strawpoll {title} [Option 1] [Option 2] [Option 3] [Option n]", value="Generates a strawpoll based on the given options. Allows more than one choice, and only one vote per user.", inline=False)
-    embed.add_field(name="!suggest *suggestion*", value="Submit a suggestion to a suggestion box. Jeremy checks the box once a week.", inline=False)
-    embed.add_field(name="!info", value="Gives information about the bot.", inline=False)
-    embed.add_field(name="!help", value="You're lookin' at it.", inline=False)
+    embed.add_field(name="/greet", value="Greets the user", inline=False)
+    embed.add_field(name="/sponge", value="SpOnGe", inline=False)
+    embed.add_field(name="/m X + Y + Z", value="Solves a math problem of any length (addition, subtraction, multiplication, division).\nAlso able to solve more advanced math. A comprehensive list is available at https://github.com/AxiaCore/py-expression-eval", inline=False)
+    embed.add_field(name="/r iDj+math", value="Roll i dice with j sides, then perform arithmetic with the results.\nCredit for this function goes to Will Irwin (Upgwades) https://github.com/Upgwades", inline=False)
+    embed.add_field(name="/8ball *question*", value="Ask the bot a yes/no question that it will answer with advanced machine learning (or random choices).", inline=False)
+    embed.add_field(name="/strawpoll {title} [Option 1] [Option 2] [Option 3] [Option n]", value="Generates a strawpoll based on the given options. Allows more than one choice, and only one vote per user.", inline=False)
+    embed.add_field(name="/suggest *suggestion*", value="Submit a suggestion to a suggestion box. Jeremy checks the box once a week.", inline=False)
+    embed.add_field(name="/info", value="Gives information about the bot.", inline=False)
+    embed.add_field(name="/help", value="You're lookin' at it.", inline=False)
     await ctx.send(embed=embed)
 
 def check_if_it_is_me(ctx):
