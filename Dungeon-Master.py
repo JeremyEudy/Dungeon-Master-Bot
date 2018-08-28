@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/28 08:40:13 by jeudy2552          -------------          #
+#    Updated: 2018/08/28 08:43:10 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -129,8 +129,9 @@ async def announce(ctx, *args):
         textList = list(text)
         text = ''.join(textList[back+1:-1])
         channel = ''.join(textList[front:back])
+        print("Parse channel name: {}".format(channel))
         textChannel = discord.utils.get(client.get_all_channels(), name=channel)
-        if channel == textChannel.name:
+        if channel == textChannel:
             embed = discord.Embed(title="Announcement:", description=text, color=0xeee657)
             await client.send_message(discord.Object(id=channel, embed=embed))
         else:
