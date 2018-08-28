@@ -26,35 +26,43 @@ This will install all dependencies for the bot. The dependencies are as listed b
 -Dice-Roller
 
 ## Setup
-You must generate a token for this bot in order to implement it in your server. The token must be kept secret, so it will not be included in this repo. Add the token as the only line in a .txt file name ```Token.txt``` and place it in the same directory as ```Dungeon-Master-Bot.py```
+You must generate a token for this bot in order to implement it in your server. The token must be kept secret, so it will not be included in this repo. Add the token as the only line in a .txt file named ```Token.txt``` and place it in the same directory as ```Dungeon-Master-Bot.py```
+
+Also to implement some commands you need to have the bot allow you to. Create a .txt file named ```ID.txt``` containing only your discord ID in it, and place it in the same directory as ```Dungeon-Master-Bot.py```
+
+In order to utilize
 
 ## Functions
 This bot performs an everchanging host of functions, such as:\
-```!greet```\
+```/greet```\
 The bot responds to the user with a friendly greeting.\
-```!sponge *string*```\
+```/announce [channel] 'announcement'```\*\
+The bot makes an annoncement in the referenced channel.\
+```/defaultRole 'role'```\*\
+Sets a role to be given to users upon joining the server.
+```/sponge *string*```\
 sTrInG\
-```!m X + Y + Z```\
-The bot will perform simple to advanced math using standard operators as long as the format matches the above syntax. A comprehensive list of functions can be found here: https://github.com/AxiaCore/py-expression-eval  
-```!r iDj+math```\
+```/m X + Y + Z```\
+The bot will perform simple to advanced math using standard operators as long as the format matches the above syntax. A comprehensive list of functions can be found here: https://github.com/AxiaCore/py-expression-eval\
+```/r iDj+math```\
 Rolls i dice with j sides, and allows the user to perform arithmetic with the result.\
-```!8ball *question*```\
+```/8ball *question*```\
 Ask the bot a yes/no question that it will answer with advanced machine learning (or random choices).\
-```!strawpoll {title} [Option 1] [Option 2] [Option 3] [Option n]```\
+```/strawpoll {title} [Option 1] [Option 2] [Option 3] [Option n]```\
 Generates a strawpoll based on the title given and options listed. The poll will allow users to pick multiple options, and limits the poll to one vote per user by default.\
-```!suggest *suggestion*```\
+```/suggest *suggestion*```\
 Submit a suggestion to a suggestion box. The box is checked once a week.\
-```!info```\
+```/info```\
 Provides general information about the bot.\
-```!help```\
-Prints this menu.
+```/help```\
+Prints this menu.\
 
+\*Can only be used by administrator.
 ### Author
 Jeremy Eudy
 
 ### Special Thanks
-Will Irwin (Upgwades)\
-https://github.com/Upgwades
+[Will Irwin (Upgwades)](https://github.com/Upgwades "Will's Github")
 
 ### License
 This project is licensed under the GPLv2
