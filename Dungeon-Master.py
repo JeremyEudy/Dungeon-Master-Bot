@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/27 21:23:26 by jeudy2552          -------------          #
+#    Updated: 2018/08/27 21:25:31 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ import aiohttp
 from py_expression_eval import Parser
 import discord
 from discord.ext.commands import Bot
+from discord.ext import commands
 import strawpoll
 import requests
 import youtube_dl
@@ -28,7 +29,7 @@ f = open('Token.txt', 'r')
 TOKEN = f.read().rstrip()
 f.close()
 
-bot = Bot(command_prefix = BOT_PREFIX, description='A bot that does a whole host of things that Jeremy works on in his free time.')
+bot = commands.Bot(command_prefix = BOT_PREFIX, description='A bot that does a whole host of things that Jeremy works on in his free time.')
 
 british_insults = ['Tosser',
  'Wanker',
