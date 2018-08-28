@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/27 21:08:15 by jeudy2552          -------------          #
+#    Updated: 2018/08/27 21:11:08 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -130,7 +130,7 @@ async def announce(ctx, a):
         for channel in server.channels:
             if channel.type == 'Text':
                 textChannel.append(channel)
-        if channel in textChannels
+        if channel in textChannels:
             embed = discord.Embed(title="Announcement:", description=a, color=0xeee657)
             await client.send_message(discord.Object(id=channel, embed)
         else:
