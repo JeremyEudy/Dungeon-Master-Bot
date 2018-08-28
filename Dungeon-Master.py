@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/27 21:11:53 by jeudy2552          -------------          #
+#    Updated: 2018/08/27 21:13:32 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -169,8 +169,9 @@ async def defaultRole(ctx, *args):
         if i == 0:
             role = line.strip()
     if text in data:
-        await ctx.send("This role is already set as the default role.") 
-        elif "Default role = " in f.read():
+        await ctx.send("This role is already set as the default role.")
+        roleString = "Default role = "
+        elif roleString in f.read():
         await ctx.send("There is already a default role set. Overwriting...")
         data[0] = "Default role = "+text+"\\n"
         
