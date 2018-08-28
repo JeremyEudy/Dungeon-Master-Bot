@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/27 22:13:28 by jeudy2552          -------------          #
+#    Updated: 2018/08/27 22:15:14 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,9 +118,9 @@ def check_if_it_is_me(ctx):
 
 @bot.command()
 @commands.check(check_if_it_is_me)
-async def announce(ctx, server, *args):
+async def announce(ctx, Client, *args):
     textChannels = []
-    for channel in channels:
+    for channel in Client.get_all_channels:
         if channel.type == 'Text':
             textChannel.append(channel)
     text = '{}'.format(' '.join(args))
