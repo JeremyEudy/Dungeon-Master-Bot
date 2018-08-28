@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/27 20:53:26 by jeudy2552          -------------          #
+#    Updated: 2018/08/27 21:05:17 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -135,8 +135,9 @@ async def announce(ctx, a):
 @bot.command()
 async def greet(ctx):
 	await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention)
-'''TODO: Fix the file writing methods. Still says "index out of bounds"
+
 @bot.command()
+@commands.check()
 async def on_member_join(ctx, member):
     await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention+", welcome to the server.")
     server = str(ctx.guild.name)
@@ -152,6 +153,7 @@ async def on_member_join(ctx, member):
     f.close()
 
 @bot.command()
+@commands.has_role(check_if_it_is_me)
 async def defaultRole(ctx, *args):
     text = '{}'.format(' '.join(args))
     server = str(ctx.guild.name)
@@ -174,7 +176,7 @@ async def defaultRole(ctx, *args):
         data[0] = "Default role = "+text+"\\n"
         await ctx.send("Default role set to '"+text+"'.")
     f.close()
-'''
+
 @bot.command()
 async def sponge(ctx, *args):
     text = '{}'.format(' '.join(args))
