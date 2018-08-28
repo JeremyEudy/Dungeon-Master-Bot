@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/28 08:49:46 by jeudy2552          -------------          #
+#    Updated: 2018/08/28 09:07:00 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -130,9 +130,9 @@ async def announce(ctx, *args):
         text = ''.join(textList[back+2:-1])
         channel = str(''.join(textList[front:back]))
         print("Parse channel name: {}".format(channel))
-        textChannel = discord.utils.get(client.get_all_channels(), guild__name=ctx.guild.name, name=channel)
-        print("Contents of textChannel: {}".format(textChannel))
-        if textChannel is None:
+        textChannels = discord.utils.get(guild.text_channels(), guild__name=ctx.guild.name, name=channel)
+        print("Contents of textChannel: {}".format(textChannels))
+        if channel not in textChannels:
             await ctx.send("You have to use a real channel duder.")
         else:
             embed = discord.Embed(title="Announcement:", description=text, color=0xeee657)
