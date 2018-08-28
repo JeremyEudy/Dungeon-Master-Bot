@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/27 22:15:14 by jeudy2552          -------------          #
+#    Updated: 2018/08/27 22:22:54 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,20 +118,18 @@ def check_if_it_is_me(ctx):
 
 @bot.command()
 @commands.check(check_if_it_is_me)
-async def announce(ctx, Client, *args):
-    textChannels = []
-    for channel in Client.get_all_channels:
-        if channel.type == 'Text':
-            textChannel.append(channel)
+async def announce(ctx, server, *args):
     text = '{}'.format(' '.join(args))
     front = text.find("{")+1
     back = text.find("}")
     if front == back:
-        await ctx.send("Oof bad formatting there bud. Use [channel] *announcement*")
+        await ctx.send("Oof bad formatting there bud. Use {channel} *announcement*")
     else:
         textList = list(text)
+        text = ''.join(textList[back+1:-1])
         channel = ''.join(textList[front:back])
-        if channel in textChannels:
+        textChannel = discord.utils.get(client.get_all_channels(), name=channel)
+        if channel == textChannel:
             embed = discord.Embed(title="Announcement:", description=text, color=0xeee657)
             await client.send_message(discord.Object(id=channel, embed=embed))
         else:
