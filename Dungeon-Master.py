@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/27 22:05:51 by jeudy2552          -------------          #
+#    Updated: 2018/08/27 22:07:13 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,7 +118,11 @@ def check_if_it_is_me(ctx):
 
 @bot.command()
 @commands.check(check_if_it_is_me)
-async def announce(ctx, *args, server):
+async def announce(ctx, server, *args):
+    textChannels = []
+    for channel in server.channels:
+        if channel.type == 'Text':
+            textChannel.append(channel)
     text = '{}'.format(' '.join(args))
     front = text.find("{")+1
     back = text.find("}")
@@ -127,10 +131,6 @@ async def announce(ctx, *args, server):
     else:
         textList = list(text)
         channel = ''.join(textList[front:back])
-        textChannels = []
-        for channel in server.channels:
-            if channel.type == 'Text':
-                textChannel.append(channel)
         if channel in textChannels:
             embed = discord.Embed(title="Announcement:", description=text, color=0xeee657)
             await client.send_message(discord.Object(id=channel, embed=embed))
