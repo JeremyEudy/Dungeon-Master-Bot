@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/27 21:51:18 by jeudy2552          -------------          #
+#    Updated: 2018/08/27 21:52:35 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -120,19 +120,19 @@ def check_if_it_is_me(ctx):
 @commands.check(check_if_it_is_me)
 async def announce(ctx, *args):
     text = '{}'.format(' '.join(args))
-    front = a.find("[")
-    back = a.find("]")
+    front = text.find("[")
+    back = text.find("]")
     if front or back == -1:
         await ctx.send("Oof bad formatting there bud. Use [channel] *announcement*")
     else:
-        textList = list(a)
+        textList = list(text)
         channel = ''.join(textList[front:back])
         textChannels = []
         for channel in server.channels:
             if channel.type == 'Text':
                 textChannel.append(channel)
         if channel in textChannels:
-            embed = discord.Embed(title="Announcement:", description=a, color=0xeee657)
+            embed = discord.Embed(title="Announcement:", description=text, color=0xeee657)
             await client.send_message(discord.Object(id=channel, embed=embed))
         else:
             await ctx.send("You have to use a real channel duder.")
