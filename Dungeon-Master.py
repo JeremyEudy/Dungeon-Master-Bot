@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/28 08:36:50 by jeudy2552          -------------          #
+#    Updated: 2018/08/28 08:37:29 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -121,7 +121,7 @@ def check_if_it_is_me(ctx):
 @commands.check(check_if_it_is_me)
 async def announce(ctx, *args):
     text = '{}'.format(' '.join(args))
-    front = text.find("{")+1
+    front = text.find("{")
     back = text.find("}")
     if front == back:
         await ctx.send("Oof bad formatting there bud. Use {channel} *announcement*")
