@@ -11,3 +11,4 @@ Token.txt
 roller.py
 Dice-Roller/
 __pycache__/
+*.swp

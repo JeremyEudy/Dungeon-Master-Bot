@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/07/04 20:17:28 by jeudy2552          -------------          #
+#    Updated: 2018/08/27 20:53:26 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ import requests
 import youtube_dl
 from roller import *
 
-BOT_PREFIX = ("!")
+BOT_PREFIX = ("/")
 f = open('Token.txt', 'r')
 TOKEN = f.read().rstrip()
 f.close()
@@ -109,40 +109,71 @@ async def help(ctx):
     embed.add_field(name="!help", value="You're lookin' at it.", inline=False)
     await ctx.send(embed=embed)
 
+def check_if_it_is_me(ctx):
+    f = open("YourID.txt", "r")
+    ID = f.read()
+    f.close
+    return ID
+
+@bot.command()
+@commands.check(check_if_it_is_me)
+async def announce(ctx, a):
+    text = '{}'.format(' '.join(args))
+    front = a.find("[")
+    back = a.find("]")
+    if front or back == -1:
+        await ctx.send("Oof bad formatting there bud. Use [channel] *announcement*")
+    else:
+        textList = list(a)
+        channel = ''.join(textList[front:back])
+        if channel in discord.utils.get(guild.text_channels)
+            embed = discord.Embed(title="Announcement:", description=a, color=0xeee657)
+            await client.send_message(discord.Object(id=channel, embed)
+        else:
+            await ctx.send("You have to use a real channel duder.")
+
 @bot.command()
 async def greet(ctx):
 	await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention)
 '''TODO: Fix the file writing methods. Still says "index out of bounds"
 @bot.command()
 async def on_member_join(ctx, member):
-	await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention+", welcome to the server.")
-	server = str(ctx.guild.name)
-	fileInfo = server+"_CustomData.txt"
-	f = open(fileInfo, "a+")
-	data = f.read()
-	roleID = data[1]
-	role = discord.utils.get(member.server.roles ,id=roleID)
-	await bot.add_roles(member, role)
-	f.close()
+    await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention+", welcome to the server.")
+    server = str(ctx.guild.name)
+    fileInfo = server+"_CustomData.txt"
+    f = open(fileInfo, "a+")
+    data = f.read()
+    roleID = ''
+    for i, line in enumerate(data):
+        if i == 1:
+            roleID = line.strip()
+    role = discord.utils.get(member.server.roles ,id=roleID)
+    await bot.add_roles(member, role)
+    f.close()
 
 @bot.command()
 async def defaultRole(ctx, *args):
-	text = '{}'.format(' '.join(args))
-	server = str(ctx.guild.name)
-	fileInfo = server+"_CustomData.txt"
-	f = open(fileInfo, "a+")
-	data = f.read()
-	if text in data:
-		await ctx.send("This role is already set as the default role.")
-	elif "Default role = " in f.read():
-		await ctx.send("There is already a default role set. Overwriting...")
-		data[0] = "Default role = "+text+"\\n"
-		
-		await ctx.send("Default role set to '"+text+"'.")
-	else:
-		data[0] = "Default role = "+text+"\\n"
-		await ctx.send("Default role set to '"+text+"'.")
-	f.close()
+    text = '{}'.format(' '.join(args))
+    server = str(ctx.guild.name)
+    fileInfo = server+"_CustomData.txt"
+    f = open(fileInfo, "a+")
+    data = f.read()
+    role = ''
+    for i, line in enumerate(data):
+        if i == 0:
+            role = line.strip()
+    if text in data:
+        await ctx.send("This role is already set as the default role.") 
+        elif "Default role = " in f.read():
+        await ctx.send("There is already a default role set. Overwriting...")
+        data[0] = "Default role = "+text+"\\n"
+        
+        await ctx.send("Default role set to '"+text+"'.")
+    elif 
+    else:
+        data[0] = "Default role = "+text+"\\n"
+        await ctx.send("Default role set to '"+text+"'.")
+    f.close()
 '''
 @bot.command()
 async def sponge(ctx, *args):
