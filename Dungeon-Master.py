@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/27 22:26:10 by jeudy2552          -------------          #
+#    Updated: 2018/08/28 08:27:12 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,6 @@ import random
 import asyncio
 import aiohttp
 from py_expression_eval import Parser
-from discord import *
 from discord.ext.commands import Bot
 from discord.ext import commands
 import strawpoll
