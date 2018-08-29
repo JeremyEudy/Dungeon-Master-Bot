@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/29 13:47:00 by jeudy2552          -------------          #
+#    Updated: 2018/08/29 13:51:18 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -136,8 +136,8 @@ async def announce(ctx, *args):
         for i in channelList:
             if i.name == channel:
                 channelID = i.id
+                channel = i
         if channelID != None:
-            channel = client.get_channel(channelID)
             embed = discord.Embed(title="Announcement:", description=text, color=0xeee657)
             await channel.send(embed=embed)
         else:
