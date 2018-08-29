@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/29 14:17:43 by jeudy2552          -------------          #
+#    Updated: 2018/08/29 14:36:05 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -166,7 +166,10 @@ async def defaultRole(ctx, *args):
     fileInfo = server+"_CustomData.txt"
     f = open(fileInfo, "a+")
     data = f.readlines()
-    role = data[0]
+    try:
+        role = data[0]
+    except IndexError as e:
+        role = None
     roleString = "Default role = "
     if text in data:
         await ctx.send("This role is already set as the default role.")
