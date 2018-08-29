@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/29 16:17:44 by jeudy2552          -------------          #
+#    Updated: 2018/08/29 16:18:43 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -167,6 +167,8 @@ async def defaultRole(ctx, *args):
     f = open(fileInfo, "a+")
     data = []
     data = list(f)
+    print("Filename: {}".format(fileInfo))
+    print("list(f): {}".format(list(f)))
     print("Contents of data: {}".format(data))
     try:
         role = data[0]
