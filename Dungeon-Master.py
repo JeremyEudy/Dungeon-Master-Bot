@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/29 13:32:21 by jeudy2552          -------------          #
+#    Updated: 2018/08/29 13:36:23 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -120,6 +120,7 @@ def check_if_it_is_me(ctx):
 @bot.command()
 @commands.check(check_if_it_is_me)
 async def announce(ctx, *args):
+    client = discord.Client()
     text = '{}'.format(' '.join(args))
     front = text.find("{")+1
     back = text.find("}")
@@ -127,7 +128,7 @@ async def announce(ctx, *args):
         await ctx.send("Oof bad formatting there bud. Use {channel} *announcement*")
     else:
         textList = list(text)
-        text = ''.join(textList[back+2:-1])
+        text = ''.join(textList[back+2:])
         channel = str(''.join(textList[front:back]))
         channelList = ctx.guild.text_channels
         print("Parse channel name: {}".format(channel))
@@ -137,7 +138,7 @@ async def announce(ctx, *args):
                 channelID = i.id
         if channelID != None:
             embed = discord.Embed(title="Announcement:", description=text, color=0xeee657)
-            await ctx.send(discord.Object(id=channelID), embed=embed)
+            await client.send_message(discord.Object(id=channelID), embed=embed)
         else:
             await ctx.send("You have to use a real channel duder.")
 
