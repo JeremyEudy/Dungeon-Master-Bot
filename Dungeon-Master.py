@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/29 15:42:48 by jeudy2552          -------------          #
+#    Updated: 2018/08/29 15:48:15 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -172,22 +172,25 @@ async def defaultRole(ctx, *args):
     except IndexError as e:
         role = None
     roleString = "Default role = "
-    print("Guild roles: {}".format(ctx.guild.roles))
-    if text not in ctx.guild.roles:
-        await ctx.send("You gotta use a real role dude.")
-    if text in data:
-        await ctx.send("This role is already set as the default role.")
-    elif roleString in data:
-        await ctx.send("There is already a default role set. Overwriting...")
-        role = "Default role = "+text+"\\n"
-        data[0] = role
-        f.write(data)
-        await ctx.send("Default role set to '"+text+"'.")
+    for i in ctx.guild.roles:
+        if text == i.name:
+            roleID = i.id
+    if roleID != None:
+        if text in data:
+            await ctx.send("This role is already set as the default role.")
+        elif roleString in data:
+            await ctx.send("There is already a default role set. Overwriting...")
+            role = "Default role = "+text+"\\n"
+            data[0] = role
+            f.write(data)
+            await ctx.send("Default role set to '"+text+"'.")
+        else:
+            role = "Default role = "+text+"\\n"
+            data[0] = role
+            f.write(data)
+            await ctx.send("Default role set to '"+text+"'.")
     else:
-        role = "Default role = "+text+"\\n"
-        data[0] = role
-        f.write(data)
-        await ctx.send("Default role set to '"+text+"'.")
+        await ctx.send("You gotta use a real role dude.")
     f.close()
 
 @bot.command()
