@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/29 15:48:15 by jeudy2552          -------------          #
+#    Updated: 2018/08/29 15:59:06 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -166,6 +166,7 @@ async def defaultRole(ctx, *args):
     fileInfo = server+"_CustomData.txt"
     f = open(fileInfo, "a+")
     data = []
+    data.append(None)
     data = f.readlines()
     try:
         role = data[0]
