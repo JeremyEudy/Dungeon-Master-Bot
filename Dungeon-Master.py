@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/29 13:51:18 by jeudy2552          -------------          #
+#    Updated: 2018/08/29 14:17:43 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -131,8 +131,6 @@ async def announce(ctx, *args):
         text = ''.join(textList[back+2:])
         channel = str(''.join(textList[front:back]))
         channelList = ctx.guild.text_channels
-        print("Parse channel name: {}".format(channel))
-        print("List of text channels: {}".format(ctx.guild.text_channels))
         for i in channelList:
             if i.name == channel:
                 channelID = i.id
@@ -161,7 +159,7 @@ async def on_member_join(ctx, member):
     f.close()
 
 @bot.command()
-@commands.has_role(check_if_it_is_me)
+@commands.check(check_if_it_is_me)
 async def defaultRole(ctx, *args):
     text = '{}'.format(' '.join(args))
     server = str(ctx.guild.name)
