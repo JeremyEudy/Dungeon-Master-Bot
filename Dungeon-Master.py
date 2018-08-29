@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/29 13:31:39 by jeudy2552          -------------          #
+#    Updated: 2018/08/29 13:32:21 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -137,7 +137,7 @@ async def announce(ctx, *args):
                 channelID = i.id
         if channelID != None:
             embed = discord.Embed(title="Announcement:", description=text, color=0xeee657)
-            await ctx.send(discord.Object(id=channelID, embed=embed))
+            await ctx.send(discord.Object(id=channelID), embed=embed)
         else:
             await ctx.send("You have to use a real channel duder.")
 
