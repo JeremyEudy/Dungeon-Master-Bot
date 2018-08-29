@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/29 16:39:19 by jeudy2552          -------------          #
+#    Updated: 2018/08/29 16:39:53 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -146,7 +146,7 @@ async def greet(ctx):
 	await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention)
 #TODO: Fix this. It should be working, but it isnt
 @bot.command()
-@commands.check(check_if_it_is_me)
+#@commands.check(check_if_it_is_me)
 async def on_member_join(ctx, member):
     await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention+", welcome to the server.")
     server = str(ctx.guild.name)
