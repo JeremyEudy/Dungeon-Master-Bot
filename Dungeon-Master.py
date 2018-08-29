@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/29 15:29:32 by jeudy2552          -------------          #
+#    Updated: 2018/08/29 15:42:48 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -172,6 +172,7 @@ async def defaultRole(ctx, *args):
     except IndexError as e:
         role = None
     roleString = "Default role = "
+    print("Guild roles: {}".format(ctx.guild.roles))
     if text not in ctx.guild.roles:
         await ctx.send("You gotta use a real role dude.")
     if text in data:
