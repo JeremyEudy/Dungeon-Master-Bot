@@ -24,14 +24,16 @@ import requests
 import youtube_dl
 from roller import *
 
+
 BOT_PREFIX = ("/")
-f = open('Token.txt', 'r')
+f = open('Token.txt', 'r')	#Find token
 TOKEN = f.read().rstrip()
 f.close()
 
 bot = commands.Bot(command_prefix = BOT_PREFIX, description='A bot that does a whole host of things that Jeremy works on in his free time.')
-client = discord.Client()
+client = discord.Client()	#Initiate client object for calls
 
+#Will's beautiful insult table
 british_insults = ['Tosser',
  'Wanker',
  'Slag',
@@ -111,6 +113,7 @@ async def help(ctx):
     embed.add_field(name="/help", value="You're lookin' at it.", inline=False)
     await ctx.send(embed=embed)
 
+#Verify bot admin function
 def check_if_it_is_me(ctx):
     f = open("YourID.txt", "r")
     ID = int(f.read().rstrip())
@@ -121,21 +124,21 @@ def check_if_it_is_me(ctx):
 @commands.check(check_if_it_is_me)
 async def announce(ctx, *args):
     client = discord.Client()
-    text = '{}'.format(' '.join(args))
-    front = text.find("{")+1
+    text = '{}'.format(' '.join(args))	#Save input in text
+    front = text.find("{")+1		#Find channel name indices
     back = text.find("}")
-    if front == back:
+    if front == back:			#Verify user input channel name
         await ctx.send("Oof bad formatting there bud. Use {channel} *announcement*")
     else:
-        textList = list(text)
-        text = ''.join(textList[back+2:])
-        channel = str(''.join(textList[front:back]))
-        channelList = ctx.guild.text_channels
+        textList = list(text)		
+        text = ''.join(textList[back+2:])		#Get announcement
+        channel = str(''.join(textList[front:back]))	#Get channel
+        channelList = ctx.guild.text_channels		#Get list of channels
         for i in channelList:
-            if i.name == channel:
+            if i.name == channel:			#Find channel in channel list and save its ID
                 channelID = i.id
                 channel = i
-        if channelID != None:
+        if channelID != None:				#Verify the channel was found using ID
             embed = discord.Embed(title="Announcement:", description=text, color=0xeee657)
             await channel.send(embed=embed)
         else:
@@ -144,6 +147,7 @@ async def announce(ctx, *args):
 @bot.command()
 async def greet(ctx):
 	await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention)
+
 '''TODO: Fix this. It should be working, but it isnt.
 @bot.command()
 @commands.check(check_if_it_is_me)
@@ -213,17 +217,17 @@ async def sponge(ctx, *args):
 @bot.command()
 async def suggest(ctx, *args):
     counter = 0
-    suggestion = '{}'.format(' '.join(args))
-    server = str(ctx.guild.name)
-    suggestionFile = server+"_SuggestionBox.txt"
+    suggestion = '{}'.format(' '.join(args))		#Get input in suggestion
+    server = str(ctx.guild.name)			#Get server name
+    suggestionFile = server+"_SuggestionBox.txt"	#Construct file name based on server name
     f = open(suggestionFile, "a+")
     for line in f:
-        if ctx.message.author.mention in line: counter+=1
-    if counter >= 10:
+        if ctx.message.author.mention in line: counter+=1	#Count the number of suggestions a user has in the file
+    if counter >= 10:						#Make sure no one is spamming
         await ctx.send("I think you've submitted enough suggestions for right now... Try again later.")
     else:
         await ctx.send("Thank you for your suggestion!")
-        f.write(ctx.message.author.mention+": "+suggestion)
+        f.write(ctx.message.author.mention+": "+suggestion)	#Write suggestion to file and close
     f.close()
 
 '''
@@ -239,6 +243,7 @@ async def play(ctx, url):
 
 @bot.command()
 async def m(ctx, *args):
+    #Gets and cleans input from user and passes it to py-expression-eval parser
     a = '{}'.format(''.join(args))
     if a=="pi":
         a=a.upper()
@@ -256,6 +261,7 @@ async def m(ctx, *args):
 
 @bot.command()
 async def r(ctx, *args):
+    #A basic port of Will's roller program that essentially recreates his __main__ class and sends the output
     a = '{}'.format(''.join(args))
     ops = ['+','-','*','/']
     a = a.replace(' ','')
@@ -282,6 +288,7 @@ async def eightball(ctx, *args):
 
 @bot.event
 async def on_message(message):
+    #Create strawpoll on message
     command_name = bot.command_prefix + 'strawpoll'
     messageContent = message.content
     if message.content.startswith(command_name):
