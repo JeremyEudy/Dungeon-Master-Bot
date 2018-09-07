@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/09/07 12:28:37 by jeudy2552          -------------          #
+#    Updated: 2018/09/07 12:32:04 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -206,11 +206,11 @@ async def defaultRole(ctx, *args):
 @bot.command()
 @commands.check(check_if_it_is_me)
 async def invite(ctx):
-    inviteLink = await discord.Invite(max_age=1800, xkcd = True, max_uses = 1, channel = ctx.message.channel.id)
+    inviteLink = await bot.create_invite(destination = ctx.message.channel, xkcd = True, max_age = 1800, max_uses = 1)
     embed = discord.Embed(color=0xf41af4)
     embed.add_field(name="Discord Invite Link", value = inviteLink)
     embed.set_footer(text="Discord server invite link.")
-    await channel.send(embed=embed)
+    await bot.send_message(ctx.message.author, embed=embed)
 
 @bot.command()
 async def sponge(ctx, *args):
