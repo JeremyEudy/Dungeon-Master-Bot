@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/29 16:43:46 by jeudy2552          -------------          #
+#    Updated: 2018/09/07 12:06:44 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -147,8 +147,7 @@ async def announce(ctx, *args):
 @bot.command()
 async def greet(ctx):
 	await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention)
-
-'''TODO: Fix this. It should be working, but it isnt.
+'''
 @bot.command()
 @commands.check(check_if_it_is_me)
 async def on_member_join(member):
@@ -203,6 +202,16 @@ async def defaultRole(ctx, *args):
         await ctx.send("You gotta use a real role dude.")
     f.close()
 '''
+
+@bot.command()
+@commands.check(check_if_it_is_me)
+async def invite(ctx):
+    inviteLink = await bot.create_invite(destination = ctx.message.channel, xkcd = True, max_uses = 1)
+    embed = discord.Embed(color=0xf41af4)
+    embed.add_field(name="Discord Invite Link", value = inviteLink)
+    embed.set_footer(text="Discord server invite link.")
+    await bot.send_message(ctx.message.channel, embed=embed)
+
 @bot.command()
 async def sponge(ctx, *args):
     text = '{}'.format(' '.join(args))
