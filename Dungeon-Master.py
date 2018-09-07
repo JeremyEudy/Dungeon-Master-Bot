@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/09/07 12:32:04 by jeudy2552          -------------          #
+#    Updated: 2018/09/07 12:36:34 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,6 @@ TOKEN = f.read().rstrip()
 f.close()
 
 bot = commands.Bot(command_prefix = BOT_PREFIX, description='A bot that does a whole host of things that Jeremy works on in his free time.')
-client = discord.Client()	#Initiate client object for calls
 
 #Will's beautiful insult table
 british_insults = ['Tosser',
