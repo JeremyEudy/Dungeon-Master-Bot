@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/09/07 12:36:34 by jeudy2552          -------------          #
+#    Updated: 2018/09/07 12:49:48 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -121,6 +121,26 @@ def check_if_it_is_me(ctx):
 
 @bot.command()
 @commands.check(check_if_it_is_me)
+async def adminRole(ctx, *args):
+    text = '{}'.format(' '.join(args))
+    server = str(ctx.guild.name)
+    fileName = server+"_CustomData.txt"
+    f = open(fileName, "a+")
+    data = f.readlines()
+
+#TODO: Finish this.
+#Verify role function
+def check_role(ctx):
+    server = str(ctx.guild.name)
+    fileName = server+"_CustomData.txt"
+    f = open(fileName, "r")
+    data = f.readlines()
+    roleID = data[2]
+    f.close()
+    return ctx.author.role.id == roleID
+
+@bot.command()
+@commands.check(check_if_it_is_me)
 async def announce(ctx, *args):
     client = discord.Client()
     text = '{}'.format(' '.join(args))	#Save input in text
@@ -203,7 +223,7 @@ async def defaultRole(ctx, *args):
 '''
 
 @bot.command()
-@commands.check(check_if_it_is_me)
+@commands.check(check_role)
 async def invite(ctx):
     inviteLink = await bot.create_invite(destination = ctx.message.channel, xkcd = True, max_age = 1800, max_uses = 1)
     embed = discord.Embed(color=0xf41af4)
