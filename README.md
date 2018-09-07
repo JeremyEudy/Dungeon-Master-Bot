@@ -28,7 +28,7 @@ This will install all dependencies for the bot. The dependencies are as listed b
 ## Setup
 You must generate a token for this bot in order to implement it in your server. The token must be kept secret, so it will not be included in this repo. Add the token as the only line in a .txt file named ```Token.txt``` and place it in the same directory as ```Dungeon-Master-Bot.py```
 
-Also to implement some commands you need to have the bot allow you to. Create a .txt file named ```ID.txt``` containing only your discord ID in it, and place it in the same directory as ```Dungeon-Master-Bot.py```
+Also to implement some commands you need to have the bot allow you to. Create a .txt file named ```YourID.txt``` containing only your discord ID in it, and place it in the same directory as ```Dungeon-Master-Bot.py```
 
 In order to utilize
 
