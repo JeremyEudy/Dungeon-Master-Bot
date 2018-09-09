@@ -152,11 +152,11 @@ async def greet(ctx):
 async def on_member_join(member):
     await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention+", welcome to the server.")
     server = str(ctx.guild.name)
-    fileInfo = "CustomData/"+server+"_CustomData.txt"
+    fileInfo = "CustomData/"+server+"_DefaultRole.txt"
     f = open(fileInfo, "a+")
     data = f.readlines()
-    roleID = data[1]
-    role = discord.utils.get(member.server.roles ,id=roleID)
+    roleName = data[0]
+    role = discord.utils.get(member.server.roles ,name=roleName)
     await bot.add_roles(member, role)
     f.close()
 
