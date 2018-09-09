@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/09/07 12:49:48 by jeudy2552          -------------          #
+#    Updated: 2018/08/29 16:43:46 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ TOKEN = f.read().rstrip()
 f.close()
 
 bot = commands.Bot(command_prefix = BOT_PREFIX, description='A bot that does a whole host of things that Jeremy works on in his free time.')
+client = discord.Client()	#Initiate client object for calls
 
 #Will's beautiful insult table
 british_insults = ['Tosser',
@@ -121,26 +122,6 @@ def check_if_it_is_me(ctx):
 
 @bot.command()
 @commands.check(check_if_it_is_me)
-async def adminRole(ctx, *args):
-    text = '{}'.format(' '.join(args))
-    server = str(ctx.guild.name)
-    fileName = server+"_CustomData.txt"
-    f = open(fileName, "a+")
-    data = f.readlines()
-
-#TODO: Finish this.
-#Verify role function
-def check_role(ctx):
-    server = str(ctx.guild.name)
-    fileName = server+"_CustomData.txt"
-    f = open(fileName, "r")
-    data = f.readlines()
-    roleID = data[2]
-    f.close()
-    return ctx.author.role.id == roleID
-
-@bot.command()
-@commands.check(check_if_it_is_me)
 async def announce(ctx, *args):
     client = discord.Client()
     text = '{}'.format(' '.join(args))	#Save input in text
@@ -166,70 +147,18 @@ async def announce(ctx, *args):
 @bot.command()
 async def greet(ctx):
 	await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention)
-'''
+
 @bot.command()
-@commands.check(check_if_it_is_me)
 async def on_member_join(member):
     await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention+", welcome to the server.")
     server = str(ctx.guild.name)
-    fileInfo = server+"_CustomData.txt"
+    fileInfo = "CustomData/"+server+"_CustomData.txt"
     f = open(fileInfo, "a+")
     data = f.readlines()
     roleID = data[1]
     role = discord.utils.get(member.server.roles ,id=roleID)
     await bot.add_roles(member, role)
     f.close()
-
-@bot.command()
-@commands.check(check_if_it_is_me)
-async def defaultRole(ctx, *args):
-    text = '{}'.format(' '.join(args))
-    server = str(ctx.guild.name)
-    fileInfo = server+"_CustomData.txt"
-    f = open(fileInfo, "a+")
-    data = []
-    counter = 0
-    for lines in f:
-        data[counter].append(line)
-        print("Line: {}".format(line))
-        counter+=1
-    print("Contents of data: {}".format(data))
-    try:
-        role = data[0]
-    except IndexError as e:
-        role = None
-    roleString = "Default role = "
-    for i in ctx.guild.roles:
-        if text == i.name:
-            roleID = i.id
-    if roleID != None:
-        if text in data:
-            await ctx.send("This role is already set as the default role.")
-        elif roleString in data:
-            await ctx.send("There is already a default role set. Overwriting...")
-            role = "Default role = "+text
-            data[0] = role
-#           f.writelines(data)
-            await ctx.send("Default role set to '"+text+"'.")
-        else:
-            role = "Default role = "+text
-            data.append(None)# Dirty hack xd
-            data[0] = role
-#           f.writelines(data)
-            await ctx.send("Default role set to '"+text+"'.")
-    else:
-        await ctx.send("You gotta use a real role dude.")
-    f.close()
-'''
-
-@bot.command()
-@commands.check(check_role)
-async def invite(ctx):
-    inviteLink = await bot.create_invite(destination = ctx.message.channel, xkcd = True, max_age = 1800, max_uses = 1)
-    embed = discord.Embed(color=0xf41af4)
-    embed.add_field(name="Discord Invite Link", value = inviteLink)
-    embed.set_footer(text="Discord server invite link.")
-    await bot.send_message(ctx.message.author, embed=embed)
 
 @bot.command()
 async def sponge(ctx, *args):
@@ -247,7 +176,7 @@ async def suggest(ctx, *args):
     counter = 0
     suggestion = '{}'.format(' '.join(args))		#Get input in suggestion
     server = str(ctx.guild.name)			#Get server name
-    suggestionFile = server+"_SuggestionBox.txt"	#Construct file name based on server name
+    suggestionFile = "CustomData/"+server+"_SuggestionBox.txt"	#Construct file name based on server name
     f = open(suggestionFile, "a+")
     for line in f:
         if ctx.message.author.mention in line: counter+=1	#Count the number of suggestions a user has in the file
