@@ -44,6 +44,7 @@ def Check_Admin(ctx):
 		return True
 
 bot = commands.Bot(command_prefix = BOT_PREFIX, description='A bot that does a whole host of things that Jeremy works on in his free time.')
+client = discord.Client()
 
 #Will's beautiful insult table
 british_insults = ['Tosser',
@@ -153,7 +154,7 @@ async def greet(ctx):
 	await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention)
 
 @bot.event
-async def on_member_join(member):
+async def on_member_join(member, client):
     server = str(member.guild.name)
     fileInfo = "CustomData/"+server+"_DefaultChannel.txt"
     f = open(fileInfo, "r")
@@ -170,7 +171,7 @@ async def on_member_join(member):
     f = open(fileInfo, "r")
     roleName = str(f.read().rstrip())
     role = discord.utils.get(member.guild.roles, name=roleName)
-    await bot.add_roles(member, role)
+    await client.add_roles(member, role)
     f.close()
 
 @bot.command(name='DefaultRole', description="A command to set the default role given to new members upon joining a server.")
