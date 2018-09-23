@@ -30,8 +30,20 @@ f = open('Token.txt', 'r')	#Find token
 TOKEN = f.read().rstrip()
 f.close()
 
+f = open("YourID.txt", "r")
+OwnerID = int(f.read().rstrip())
+f.close()
+
+#Function to get server admin role
+def Check_Admin(ctx):
+	server = str(ctx.guild.name)
+	fileInfo = "CustomData/"+server+"_AdminRole.txt"
+	f = open(fileInfo, "r")
+	name = str(f.read().rstrip())
+	if name in [i.name for i in ctx.author.roles]:
+		return True
+
 bot = commands.Bot(command_prefix = BOT_PREFIX, description='A bot that does a whole host of things that Jeremy works on in his free time.')
-client = discord.Client()	#Initiate client object for calls
 
 #Will's beautiful insult table
 british_insults = ['Tosser',
@@ -113,52 +125,55 @@ async def help(ctx):
     embed.add_field(name="/help", value="You're lookin' at it.", inline=False)
     await ctx.send(embed=embed)
 
-#Verify bot admin function
-def check_if_it_is_me(ctx):
-    f = open("YourID.txt", "r")
-    ID = int(f.read().rstrip())
-    f.close()
-    return ctx.author.id == ID
-
-@bot.command()
-@commands.check(check_if_it_is_me)
+@bot.command(name='announce', description="A command to send an announcement to a specified cahnnel (it doesn't abuse @everyone)")
 async def announce(ctx, *args):
-    client = discord.Client()
-    text = '{}'.format(' '.join(args))	#Save input in text
-    front = text.find("{")+1		#Find channel name indices
-    back = text.find("}")
-    if front == back:			#Verify user input channel name
-        await ctx.send("Oof bad formatting there bud. Use {channel} *announcement*")
-    else:
-        textList = list(text)		
-        text = ''.join(textList[back+2:])		#Get announcement
-        channel = str(''.join(textList[front:back]))	#Get channel
-        channelList = ctx.guild.text_channels		#Get list of channels
-        for i in channelList:
-            if i.name == channel:			#Find channel in channel list and save its ID
-                channelID = i.id
-                channel = i
-        if channelID != None:				#Verify the channel was found using ID
-            embed = discord.Embed(title="Announcement:", description=text, color=0xeee657)
-            await channel.send(embed=embed)
-        else:
-            await ctx.send("You have to use a real channel duder.")
+	if(Check_Admin(ctx)):
+		text = '{}'.format(' '.join(args))	#Save input in text
+		front = text.find("{")+1		#Find channel name indices
+		back = text.find("}")
+		if text.find("{") == back:			#Verify user input channel name
+			await ctx.send("Oof bad formatting there bud. Use {channel} *announcement*")
+		else:
+			textList = list(text)		
+			text = ''.join(textList[back+2:])		#Get announcement
+			channel = str(''.join(textList[front:back]))	#Get channel
+			channelList = ctx.guild.text_channels		#Get list of channels
+			for i in channelList:
+				if i.name == channel:			#Find channel in channel list and save its ID
+					channelID = i.id
+					channel = i
+			if channelID != None:				#Verify the channel was found using ID
+	        		embed = discord.Embed(title="Announcement:", description=text, color=0xeee657)
+			        await channel.send(embed=embed)
+			else:
+	        		await ctx.send("You have to use a real channel duder.")
 
 @bot.command()
 async def greet(ctx):
 	await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention)
 
-@bot.command()
+@bot.event
 async def on_member_join(member):
     await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention+", welcome to the server.")
     server = str(ctx.guild.name)
     fileInfo = "CustomData/"+server+"_DefaultRole.txt"
     f = open(fileInfo, "a+")
-    data = f.readlines()
-    roleName = data[0]
+    roleName = str(f.read().rstrip())
     role = discord.utils.get(member.server.roles ,name=roleName)
     await bot.add_roles(member, role)
     f.close()
+
+@bot.command(name='DefaultRole', description="A command to set the default role given to new members upon joining a server.")
+async def DefaultRole(ctx, *args):
+	if(Check_Admin(ctx)):
+		text = '{}'.format(' '.join(args))
+		server = str(ctx.guild.name)
+		fileInfo = "CustomData/"+server+"_DefaultRole.txt"
+		f = open(fileInfo, "w")
+		data = f.readlines()
+		f.write(text)
+		await ctx.send("The default role is now "+text)
+		f.close()
 
 @bot.command()
 async def sponge(ctx, *args):
@@ -216,9 +231,8 @@ async def m(ctx, *args):
     else:
         await ctx.send(ctx.message.author.mention+" don't divide by 0!")
 
-@bot.command()
+@bot.command(name='r', description="A basic port of Will's roller program that essentially recreates his __main__ class and sends the output")
 async def r(ctx, *args):
-    #A basic port of Will's roller program that essentially recreates his __main__ class and sends the output
     a = '{}'.format(''.join(args))
     ops = ['+','-','*','/']
     a = a.replace(' ','')
