@@ -165,7 +165,7 @@ async def on_member_join(member):
             channelID = i.id
             channel = i
     if channelID != None:
-        await channel.send(":smiley: :wave: Hello, there "+ctx.message.author.mention+", welcome to the server.")
+        await channel.send(":smiley: :wave: Hello, there "+member.mention+", welcome to the server.")
     fileInfo = "CustomData/"+server+"_DefaultRole.txt"
     f = open(fileInfo, "r")
     roleName = str(f.read().rstrip())
