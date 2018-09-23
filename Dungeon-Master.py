@@ -154,7 +154,7 @@ async def greet(ctx):
 	await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention)
 
 @bot.event
-async def on_member_join(member, client):
+async def on_member_join(member):
     server = str(member.guild.name)
     fileInfo = "CustomData/"+server+"_DefaultChannel.txt"
     f = open(fileInfo, "r")
