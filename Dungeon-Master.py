@@ -153,11 +153,15 @@ async def greet(ctx):
 	await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention)
 
 @bot.event
-async def on_member_join(ctx, member):
-    await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention+", welcome to the server.")
+async def on_member_join(member):
+    fileInfo = "CustomData/"+server+"_DefaultChannel.txt"
+    f = open(fileInfo, "r")
+    channel = str(f.read().rstrip())
+    f.close()
+    await channel.send(":smiley: :wave: Hello, there "+ctx.message.author.mention+", welcome to the server.")
     server = str(ctx.guild.name)
     fileInfo = "CustomData/"+server+"_DefaultRole.txt"
-    f = open(fileInfo, "a+")
+    f = open(fileInfo, "r")
     roleName = str(f.read().rstrip())
     role = discord.utils.get(member.server.roles ,name=roleName)
     await bot.add_roles(member, role)
@@ -172,6 +176,17 @@ async def DefaultRole(ctx, *args):
 		f = open(fileInfo, "w")
 		f.write(text)
 		await ctx.send("The default role is now "+text)
+		f.close()
+
+@bot.command(name='DefaultChannel', description="A command to set the default channel for the server.")
+async def DefaultChannel(ctx, *args):
+	if(Check_Admin(ctx)):
+		text = '{}'.format(' '.join(args))
+		server = str(ctx.guild.name)
+		fileInfo = "CustomData/"+server+"_DefaultChannel.txt"
+		f = open(fileInfo, "w")
+		f.write(text)
+		await ctx.send("The default channel is now "+text)
 		f.close()
 
 @bot.command()
