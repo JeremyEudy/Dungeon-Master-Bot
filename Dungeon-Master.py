@@ -153,7 +153,7 @@ async def greet(ctx):
 	await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention)
 
 @bot.event
-async def on_member_join(member):
+async def on_member_join(ctx, member):
     await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention+", welcome to the server.")
     server = str(ctx.guild.name)
     fileInfo = "CustomData/"+server+"_DefaultRole.txt"
