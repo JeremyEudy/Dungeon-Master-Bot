@@ -170,7 +170,6 @@ async def DefaultRole(ctx, *args):
 		server = str(ctx.guild.name)
 		fileInfo = "CustomData/"+server+"_DefaultRole.txt"
 		f = open(fileInfo, "w")
-		data = f.readlines()
 		f.write(text)
 		await ctx.send("The default role is now "+text)
 		f.close()
