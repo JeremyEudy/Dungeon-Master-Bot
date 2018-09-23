@@ -154,7 +154,7 @@ async def greet(ctx):
 
 @bot.event
 async def on_member_join(member):
-    server = str(ctx.guild.name)
+    server = str(member.guild.name)
     fileInfo = "CustomData/"+server+"_DefaultChannel.txt"
     f = open(fileInfo, "r")
     channel = str(f.read().rstrip())
