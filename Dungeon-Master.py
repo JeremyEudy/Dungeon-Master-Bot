@@ -169,7 +169,7 @@ async def on_member_join(member):
     fileInfo = "CustomData/"+server+"_DefaultRole.txt"
     f = open(fileInfo, "r")
     roleName = str(f.read().rstrip())
-    role = discord.utils.get(member.guild.roles ,name=roleName)
+    role = discord.utils.get(member.guild.roles, name=roleName)
     await bot.add_roles(member, role)
     f.close()
 
