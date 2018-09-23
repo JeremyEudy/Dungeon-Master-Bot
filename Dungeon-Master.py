@@ -159,7 +159,13 @@ async def on_member_join(member):
     f = open(fileInfo, "r")
     channel = str(f.read().rstrip())
     f.close()
-    await channel.send(":smiley: :wave: Hello, there "+ctx.message.author.mention+", welcome to the server.")
+    channelList = member.guild.text_channels
+    for i in channelList:
+        if i.name == channel:
+            channelID = i.id
+            channel = i
+    if channelID != None:
+        await channel.send(":smiley: :wave: Hello, there "+ctx.message.author.mention+", welcome to the server.")
     fileInfo = "CustomData/"+server+"_DefaultRole.txt"
     f = open(fileInfo, "r")
     roleName = str(f.read().rstrip())
