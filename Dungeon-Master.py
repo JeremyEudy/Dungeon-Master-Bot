@@ -117,6 +117,7 @@ async def help(ctx):
     embed = discord.Embed(title="Dungeon-Master", description="This bot does some stuff, here's a list:", color=0xeee657)
     embed.add_field(name="/greet", value="Greets the user", inline=False)
     embed.add_field(name="/sponge", value="SpOnGe", inline=False)
+    embed.add_field(name="/shrug", value=" ¯\_(ツ)_/¯", inline=False)
     embed.add_field(name="/m X + Y + Z", value="Solves a math problem of any length (addition, subtraction, multiplication, division).\nAlso able to solve more advanced math. A comprehensive list is available at https://github.com/AxiaCore/py-expression-eval", inline=False)
     embed.add_field(name="/r iDj+math", value="Roll i dice with j sides, then perform arithmetic with the results.\nCredit for this function goes to Will Irwin (Upgwades) https://github.com/Upgwades", inline=False)
     embed.add_field(name="/8ball *question*", value="Ask the bot a yes/no question that it will answer with advanced machine learning (or random choices).", inline=False)
