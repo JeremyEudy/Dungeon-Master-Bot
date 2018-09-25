@@ -153,6 +153,10 @@ async def announce(ctx, *args):
 async def greet(ctx):
 	await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention)
 
+@bot.command()
+async def shrug(ctx):
+	await ctx.send("¯\_(ツ)_/¯")
+
 @bot.event
 async def on_member_join(member):
     server = str(member.guild.name)
