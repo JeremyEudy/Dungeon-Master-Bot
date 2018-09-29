@@ -176,7 +176,7 @@ async def on_member_join(member):
     f = open(fileInfo, "r")
     roleName = str(f.read().rstrip())
     role = discord.utils.get(member.guild.roles, name=roleName)
-    await client.add_roles(member, role)
+    await member.add_roles(role, atomic=True)
     f.close()
 
 @bot.command(name='DefaultRole', description="A command to set the default role given to new members upon joining a server.")
