@@ -129,7 +129,7 @@ async def help(ctx):
     if(Check_Admin(ctx)):
         if(ctx.author.dm_channel == None):
             ctx.author.member.create_dm()
-        channel = ctx.author.member.dm_channel
+        channel = ctx.author.dm_channel
         embed = discord.Embed(title="Dungeon-Master (Admin Commands)", description="Here's a secret list of commands your role can perform:", color=0xeee657)
         embed.add_field(name="/announce {channel name} *announcement*", value="A command to send an announcement to a specified channel (it doesn't abuse @everyone)", inline=False)
         embed.add_field(name="/DefaultChannel *channel name*", value="Sets the default posting channel for the bot.", inline=False)
