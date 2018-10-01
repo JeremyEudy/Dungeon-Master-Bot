@@ -128,7 +128,7 @@ async def help(ctx):
     await ctx.send(embed=embed)
     if(Check_Admin(ctx)):
         channel = ctx.author.dm_channel
-        if(channel == None):
+        if(type(channel) == None):
             ctx.author.create_dm()
         channel = ctx.author.dm_channel
         embed = discord.Embed(title="Dungeon-Master (Admin Commands)", description="Here's a secret list of commands your role can perform:", color=0xeee657)
