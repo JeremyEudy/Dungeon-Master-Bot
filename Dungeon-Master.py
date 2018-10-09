@@ -172,7 +172,7 @@ async def shrug(ctx):
 
 @bot.command()
 async def ping(ctx):
-	await ctx.send('Pong! :ping_pong: {}'.format(round(bot.latency, 1)))
+	await ctx.send(':ping_pong: Pong! {}'.format(round(bot.latency, 1)))
 
 @bot.event
 async def on_member_join(member):
