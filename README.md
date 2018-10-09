@@ -39,7 +39,7 @@ The bot responds to the user with a friendly greeting.\
 ```/announce [channel] 'announcement'```\*\
 The bot makes an annoncement in the referenced channel.\
 ```/defaultRole 'role'```\*\
-Sets a role to be given to users upon joining the server.
+Sets a role to be given to users upon joining the server.\
 ```/sponge *string*```\
 sTrInG\
 ```/m X + Y + Z```\
