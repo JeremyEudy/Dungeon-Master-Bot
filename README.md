@@ -45,13 +45,15 @@ sTrInG\
 ```/m X + Y + Z```\
 The bot will perform simple to advanced math using standard operators as long as the format matches the above syntax. A comprehensive list of functions can be found here: https://github.com/AxiaCore/py-expression-eval\
 ```/r iDj+math```\
-Rolls i dice with j sides, and allows the user to perform arithmetic with the result.\
+Rolls i dice with j sides, and allows the user to perform arithmetic with the result. Credit goes to [Will Irwin (Upgwades)](https://github.com/Upgwades "Will's Github")\
 ```/8ball *question*```\
 Ask the bot a yes/no question that it will answer with advanced machine learning (or random choices).\
 ```/strawpoll {title} [Option 1] [Option 2] [Option 3] [Option n]```\
 Generates a strawpoll based on the title given and options listed. The poll will allow users to pick multiple options, and limits the poll to one vote per user by default.\
 ```/suggest *suggestion*```\
 Submit a suggestion to a suggestion box. The box is checked once a week.\
+```/ping```\
+Returns the latency of the bot.\
 ```/info```\
 Provides general information about the bot.\
 ```/help```\
