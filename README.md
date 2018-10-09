@@ -43,7 +43,7 @@ Sets a role to be given to users upon joining the server.\
 ```/sponge *string*```\
 sTrInG\
 ```/m X + Y + Z```\
-The bot will perform simple to advanced math using standard operators as long as the format matches the above syntax. A comprehensive list of functions can be found here: https://github.com/AxiaCore/py-expression-eval\
+The bot will perform simple to advanced math using standard operators as long as the format matches the above syntax. A comprehensive list of functions can be found here: https://github.com/AxiaCore/py-expression-eval \
 ```/r iDj+math```\
 Rolls i dice with j sides, and allows the user to perform arithmetic with the result. Credit goes to [Will Irwin (Upgwades)](https://github.com/Upgwades "Will's Github")\
 ```/8ball *question*```\
