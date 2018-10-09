@@ -24,6 +24,7 @@ import requests
 import youtube_dl
 from roller import *
 
+#TODO: Fix versioning issues.
 
 BOT_PREFIX = ("/")
 f = open('Token.txt', 'r')	#Find token
@@ -123,6 +124,7 @@ async def help(ctx):
     embed.add_field(name="/8ball *question*", value="Ask the bot a yes/no question that it will answer with advanced machine learning (or random choices).", inline=False)
     embed.add_field(name="/strawpoll {title} [Option 1] [Option 2] [Option 3] [Option n]", value="Generates a strawpoll based on the given options. Allows more than one choice, and only one vote per user.", inline=False)
     embed.add_field(name="/suggest *suggestion*", value="Submit a suggestion to a suggestion box. Jeremy checks the box once a week.", inline=False)
+    embed.add_field(name="/ping", value="Returns the latency of the bot.", inline=False)
     embed.add_field(name="/info", value="Gives information about the bot.", inline=False)
     embed.add_field(name="/help", value="You're lookin' at it.", inline=False)
     await ctx.send(embed=embed)
@@ -167,6 +169,10 @@ async def greet(ctx):
 @bot.command()
 async def shrug(ctx):
 	await ctx.send("¯\_(ツ)_/¯")
+
+@bot.command()
+async def ping(ctx):
+	await ctx.send('Pong! :ping_pong: {0}'.format(round(bot.latency, 1)))
 
 @bot.event
 async def on_member_join(member):
