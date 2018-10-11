@@ -316,8 +316,8 @@ async def eightball(ctx, *args):
 	choice = random.randint(0, len(responses)-1)			#Randomly pick one
 	await ctx.send(ctx.message.author.mention+": "+responses[choice])
 
-@bot.command(name='strawpoll', description="A simple interface for the strawpoll.me API.")
-async def strawpoll(ctx, *args):
+@bot.command(name='strawpoll', description="A simple interface for the strawpoll.me API.", aliases=['strawpoll'])
+async def newStrawpoll(ctx, *args):
 	message = '{}'.format(''.join(args))
 	#Gets the title of the poll
 	first = message.find("{") + 1
