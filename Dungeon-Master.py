@@ -19,6 +19,7 @@ from py_expression_eval import Parser
 import discord
 from discord.ext.commands import Bot
 from discord.ext import commands
+from discord.voice_client import VoiceClient
 import strawpoll
 import requests
 import youtube_dl
