@@ -138,7 +138,7 @@ async def help(ctx):
 		#If the user that called /help is an admin, then the bot sends them a PM with admin commands
 		channel = ctx.author.dm_channel
 		if(channel is None):
-			ctx.author.create_dm()
+			await ctx.author.create_dm()
 		channel = ctx.author.dm_channel
 		embed = discord.Embed(title="Dungeon-Master (Admin Commands)", description="Here's a secret list of commands your role can perform:", color=0xeee657)
 		embed.add_field(name="/announce {channel name} *announcement*", value="A command to send an announcement to a specified channel (it doesn't abuse @everyone)", inline=False)
