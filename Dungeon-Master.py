@@ -351,6 +351,6 @@ async def strawpoll(ctx, *args):
 		await ctx.send("https://strawpoll.me/" + str(json["id"]))
 
 	except:
-		await ctx.send( "Please make sure you are using the format '!strawpoll {title} [Option1] [Option2] [Option 3]'")
+		await ctx.send( "Please make sure you are using the format '/strawpoll {title} [Option1] [Option2] [Option 3]'")
 
 bot.run(TOKEN)
