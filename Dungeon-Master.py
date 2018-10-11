@@ -38,11 +38,16 @@ f.close()
 #Function to get server admin role
 def Check_Admin(ctx):
 	server = str(ctx.guild.name)
-	fileInfo = "CustomData/"+server+"_AdminRole.txt"
-	f = open(fileInfo, "r")
-	name = str(f.read().rstrip())
-	if name in [i.name for i in ctx.author.roles]:
-		return True
+	try:
+		fileInfo = "CustomData/"+server+"_AdminRole.txt"
+		f = open(fileInfo, "r")
+		roleName = str(f.read().rstrip())
+		if roleName in [i.name for i in ctx.author.roles]:
+			return True
+		else:
+			return False
+	except:
+		return False
 
 bot = commands.Bot(command_prefix = BOT_PREFIX, description='A bot that does a whole host of things that Jeremy works on in his free time.')
 client = discord.Client()
@@ -177,23 +182,29 @@ async def ping(ctx):
 @bot.event
 async def on_member_join(member):
     server = str(member.guild.name)
-    fileInfo = "CustomData/"+server+"_DefaultChannel.txt"
-    f = open(fileInfo, "r")
-    channel = str(f.read().rstrip())
-    f.close()
-    channelList = member.guild.text_channels
-    for i in channelList:
-        if i.name == channel:
-            channelID = i.id
-            channel = i
-    if channelID != None:
-        await channel.send(":smiley: :wave: Hello, there "+member.mention+", welcome to the server.")
-    fileInfo = "CustomData/"+server+"_DefaultRole.txt"
-    f = open(fileInfo, "r")
-    roleName = str(f.read().rstrip())
-    role = discord.utils.get(member.guild.roles, name=roleName)
-    await member.add_roles(role, atomic=True)
-    f.close()
+    try:
+        fileInfo = "CustomData/"+server+"_DefaultChannel.txt"
+        f = open(fileInfo, "r")
+        channel = str(f.read().rstrip())
+        f.close()
+        channelList = member.guild.text_channels
+        for i in channelList:
+            if i.name == channel:
+                channelID = i.id
+                channel = i
+        if channelID != None:
+            await channel.send(":smiley: :wave: Hello, there "+member.mention+", welcome to the server.")
+    except:
+        pass
+    try:
+        fileInfo = "CustomData/"+server+"_DefaultRole.txt"
+        f = open(fileInfo, "r")
+        roleName = str(f.read().rstrip())
+        role = discord.utils.get(member.guild.roles, name=roleName)
+        await member.add_roles(role, atomic=True)
+        f.close()
+    except:
+        pass
 
 @bot.command(name='DefaultRole', description="A command to set the default role given to new members upon joining a server.")
 async def DefaultRole(ctx, *args):
