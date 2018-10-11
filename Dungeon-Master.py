@@ -24,8 +24,6 @@ import requests
 import youtube_dl
 from roller import *
 
-#TODO: Fix versioning issues.
-
 BOT_PREFIX = ("/")
 f = open('Token.txt', 'r')	#Find token
 TOKEN = f.read().rstrip()
@@ -50,7 +48,6 @@ def Check_Admin(ctx):
 		return False
 
 bot = commands.Bot(command_prefix = BOT_PREFIX, description='A bot that does a whole host of things that Jeremy works on in his free time.')
-client = discord.Client()
 
 #Will's beautiful insult table
 british_insults = ['Tosser',
