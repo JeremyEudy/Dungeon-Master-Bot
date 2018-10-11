@@ -344,11 +344,9 @@ async def newStrawpoll(ctx, *args):
 				second = newMessage.find("]")
 				second1 = second + 1
 				option.append(newMessage[first:second])
-	strawpollAPI = strawpoll.API()
 	try:
 		r = requests.post('https://www.strawpoll.me/api/v2/polls', json = {"title": title, "options": option[:(len(option)-1)], "multi": "true"}, headers={"Content Type": "application/json"})		#Send poll to strawpoll.me
 		json = r.json()
-		r.close()
 		await ctx.send("https://strawpoll.me/" + str(json["id"]))
 
 	except:
