@@ -313,8 +313,8 @@ async def eightball(ctx, *args):
 	choice = random.randint(0, len(responses)-1)			#Randomly pick one
 	await ctx.send(ctx.message.author.mention+": "+responses[choice])
 
-@bot.command(name='strawpoll', description="A simple interface for the strawpoll.me API.")
-async def strawpoll(ctx, *args):
+@bot.command(name='newStrawpoll', description="A simple interface for the strawpoll.me API.", aliases=['strawpoll'])
+async def newStrawpoll(ctx, *args):
 	message = '{}'.format(''.join(args))
 	#Gets the title of the poll
 	first = message.find("{") + 1
@@ -327,35 +327,26 @@ async def strawpoll(ctx, *args):
 
 	option = []
 	for options in message:
-		#Get from } [option 1]
-		#If newThis == -1:
-		stillOptions = newMessage.find("[")
+		stillOptions = newMessage.find("[")	#Checks to see if there's more options
 		if stillOptions != -1:
-			if loopTime == 0:
+			if loopTime == 0:		#First run has to be different so there's a separate case
 				first = newMessage.find("[") + 1
-
 				second = newMessage.find("]")
 				second1 = second + 1
 				option.append(newMessage[first:second])
-
 				loopTime+=1
 			else:
-				newMessage = newMessage[second1:]
+				newMessage = newMessage[second1:]	#Update the contents of newMessage to get rid of old options
 				first = newMessage.find("[") + 1
 				second = newMessage.find("]")
 				second1 = second + 1
 				option.append(newMessage[first:second])
-				loopTime+=1
-	strawpollAPI = strawpoll.API()
 	try:
-		r = requests.post('https://www.strawpoll.me/api/v2/polls', json = {"title": title, "options": option[:(len(option)-1)], "multi": "true"}, headers={"Content Type": "application/json"})
+		r = requests.post('https://www.strawpoll.me/api/v2/polls', json = {"title": title, "options": option[:(len(option)-1)], "multi": "true"}, headers={"Content Type": "application/json"})		#Send poll to strawpoll.me
 		json = r.json()
-		return "https://strawpoll.me/" + str(json["id"])
+		await ctx.send("https://strawpoll.me/" + str(json["id"]))
 
-	except strawpoll.errors.HTTPException:
-		return "Please make sure you are using the format '!strawpoll {title} [Option1] [Option2] [Option 3]'"
-
-	except KeyError:
-		return "Please make sure you are using the format '!strawpoll {title} [Option1] [Option2] [Option 3]'"
+	except:
+		await ctx.send( "Please make sure you are using the format '/strawpoll {title} [Option1] [Option2] [Option 3]'")
 
 bot.run(TOKEN)
