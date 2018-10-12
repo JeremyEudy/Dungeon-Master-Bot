@@ -21,3 +21,4 @@ sudo python3.6 -m pip install --upgrade youtube-dl
 sudo python3.6 -m pip install opuslib
 git clone https://github.com/Upgwades/Dice-Roller && mv roller.py ..
 mkdir CustomData/
+mkdir CustomData/Images/
