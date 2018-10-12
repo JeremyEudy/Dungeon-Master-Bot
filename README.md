@@ -34,11 +34,11 @@ Some commands are restricted to admin only based on the user's role. In order to
 This bot performs an everchanging host of functions, such as:\
 - ```/greet```
   - The bot responds to the user with a friendly greeting.
-- ```/announce [channel] 'announcement'```\*
+- ```/announce [channel] 'announcement'```<sup>†</sup>
   - The bot makes an annoncement in the referenced channel.
-- ```/defaultRole 'role'```\*
+- ```/defaultRole 'role'```<sup>†</sup>
   - Sets a role to be given to users upon joining the server.
-- ```/defaultChannel 'channel'```\*
+- ```/defaultChannel 'channel'```<sup>†</sup>
   - Sets the default channel for the server for generic bot messaging.
 - ```/sponge *string*```
   - sTrInG
@@ -62,7 +62,7 @@ This bot performs an everchanging host of functions, such as:\
 - ```/help```
   - Prints this menu.
 
-\*Can only be used by administrator.
+<sup>†</sup>Can only be used by administrator.
 ### Author
 Jeremy Eudy
 
