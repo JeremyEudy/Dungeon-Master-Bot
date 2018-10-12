@@ -28,7 +28,7 @@ This will install all dependencies for the bot. The dependencies are as listed b
 ## Setup
 You must generate a token for this bot in order to implement it in your server. The token must be kept secret, so it will not be included in this repo. Add the token as the only line in a .txt file named ```Token.txt``` and place it in the same directory as ```Dungeon-Master-Bot.py```
 
-Some commands are restricted to admin only based on the user's role. In order to access these commands, create a .txt file in `CustomData/` called `ServerName_AdminRole.txt` (you must type your server name exactly the way it appears in discord), containing the name of the admin role for your server.
+Some commands are restricted to admin only based on the user's role. In order to access these commands, create a `.txt` file in `CustomData/` called `ServerName_AdminRole.txt` (you must type your server name exactly the way it appears in discord), containing the name of the admin role for your server.
 
 ## Functions
 This bot performs an everchanging host of functions, such as:\
