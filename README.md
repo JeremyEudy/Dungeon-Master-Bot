@@ -1,5 +1,5 @@
 # Dungeon-Master-Bot
-A discord bot used for making dicerolls, strawpolls, doing math, and other easily automated tasks.
+A discord bot used for server administration, making dicerolls, strawpolls, doing math, and other easily automated tasks.
 
 ## Getting Started
 Easy clone:
