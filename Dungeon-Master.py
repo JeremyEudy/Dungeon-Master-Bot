@@ -238,7 +238,12 @@ async def sponge(ctx, *args):
 			text[i]=text[i].upper()
 		else:
 			text[i]=text[i].lower()
-	await ctx.send(ctx.message.author.mention+": "+''.join(text))
+	text = ctx.message.author.mention+": "+''.join(text)
+	try:
+		picture = discord.File("CustomData/Images/Sponge.png")	#Directory for mocking spongebob image
+		await ctx.send(content=text, file=picture)
+	except:
+		await ctx.send(text)
 
 @bot.command()
 async def suggest(ctx, *args):
