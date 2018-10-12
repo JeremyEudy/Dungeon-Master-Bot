@@ -28,9 +28,7 @@ This will install all dependencies for the bot. The dependencies are as listed b
 ## Setup
 You must generate a token for this bot in order to implement it in your server. The token must be kept secret, so it will not be included in this repo. Add the token as the only line in a .txt file named ```Token.txt``` and place it in the same directory as ```Dungeon-Master-Bot.py```
 
-Also to implement some commands you need to have the bot allow you to. Create a .txt file named ```YourID.txt``` containing only your discord ID in it, and place it in the same directory as ```Dungeon-Master-Bot.py```
-
-In order to utilize
+Some commands are restricted to admin only based on the user's role. In order to access these commands, create a .txt file in `CustomData/` called `ServerName_AdminRole.txt` (you must type your server name exactly the way it appears in discord), containing the name of the admin role for your server.
 
 ## Functions
 This bot performs an everchanging host of functions, such as:\
@@ -40,8 +38,13 @@ The bot responds to the user with a friendly greeting.\
 The bot makes an annoncement in the referenced channel.\
 ```/defaultRole 'role'```\*\
 Sets a role to be given to users upon joining the server.\
+```/defaultChannel 'channel'```\*\
+Sets the default channel for the server for generic bot messaging.\
 ```/sponge *string*```\
 sTrInG\
+(If you would like this to also insert a picture of mocking spongebob, then put that picture in `CustomData/Images/` and save it as `Sponge.png`)\
+```/shrug```\
+¯\\_(ツ)_/¯\
 ```/m X + Y + Z```\
 The bot will perform simple to advanced math using standard operators as long as the format matches the above syntax. A comprehensive list of functions can be found here: https://github.com/AxiaCore/py-expression-eval \
 ```/r iDj+math```\
