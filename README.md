@@ -16,13 +16,13 @@ chmod +x setup.sh
 sudo ./setup.sh
 ```
 This will install all dependencies for the bot. The dependencies are as listed below:\
-- asyncio\
-- aiohttp (3.3.0-3.4.3)\
-- discord.py (1.0.0a0)\
-- py_expression_eval\
-- strawpoll.py\
-- youtube-dl\
-- opuslib\
+- asyncio
+- aiohttp (3.3.0-3.4.3)
+- discord.py (1.0.0a0)
+- py_expression_eval
+- strawpoll.py
+- youtube-dl
+- opuslib
 - Dice-Roller
 
 ## Setup
