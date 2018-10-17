@@ -15,7 +15,7 @@ To setup this bot, run the setup.sh script:
 chmod +x setup.sh
 sudo ./setup.sh
 ```
-This will install all dependencies for the bot. The dependencies are as listed below:\
+This will install all dependencies for the bot. The dependencies are as listed below:
 - asyncio
 - aiohttp (3.3.0-3.4.3)
 - discord.py (1.0.0a0)
@@ -31,7 +31,7 @@ You must generate a token for this bot in order to implement it in your server. 
 Some commands are restricted to admin only based on the user's role. In order to access these commands, create a `.txt` file in `CustomData/` called `ServerName_AdminRole.txt` (you must type your server name exactly the way it appears in discord), containing the name of the admin role for your server.
 
 ## Functions
-This bot performs an everchanging host of functions, such as:\
+This bot performs an everchanging host of functions, such as:
 - ```/greet```
   - The bot responds to the user with a friendly greeting.
 - ```/announce [channel] 'announcement'```<sup>†</sup>
