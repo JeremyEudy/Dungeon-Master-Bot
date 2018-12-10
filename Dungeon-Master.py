@@ -170,11 +170,11 @@ async def announce(ctx, *args):
 
 @bot.command(name='say', description="A command to speak through the bot.")
 async def say(ctx, *args):
-        if(Check_Admin(ctx)):
-                text = '{}'.format(' '.join(args))
-        	front = text.find("{")+1		#Find channel name indices
-	        back = text.find("}")
-        	if text.find("{") == back:			#Verify user input channel name
+	if(Check_Admin(ctx)):
+		text = '{}'.format(' '.join(args))
+		front = text.find("{")+1		#Find channel name indices
+		back = text.find("}")
+		if text.find("{") == back:			#Verify user input channel name
 			await ctx.send("Oof bad formatting there bud. Use {channel} *announcement*")
 		else:
 			textList = list(text)		
@@ -189,7 +189,6 @@ async def say(ctx, *args):
 			        await channel.send(text)
 			else:
 	        		await ctx.send("You have to use a real channel duder.")
-        
 
 @bot.command(description="Greets users")
 async def greet(ctx):
