@@ -167,6 +167,30 @@ async def announce(ctx, *args):
 			else:
 	        		await ctx.send("You have to use a real channel duder.")
 
+
+@bot.command(name='say', description="A command to speak through the bot.")
+async def say(ctx, *args):
+        if(Check_Admin(ctx)):
+                text = '{}'.format(' '.join(args))
+        	front = text.find("{")+1		#Find channel name indices
+	        back = text.find("}")
+        	if text.find("{") == back:			#Verify user input channel name
+			await ctx.send("Oof bad formatting there bud. Use {channel} *announcement*")
+		else:
+			textList = list(text)		
+			text = ''.join(textList[back+2:])		#Get message contents
+			channel = str(''.join(textList[front:back]))	#Get channel
+			channelList = ctx.guild.text_channels		#Get list of channels
+			for i in channelList:
+				if i.name == channel:			#Find channel in channel list and save its ID
+					channelID = i.id
+					channel = i
+			if channelID != None:				#Verify the channel was found using ID
+			        await channel.send(text)
+			else:
+	        		await ctx.send("You have to use a real channel duder.")
+        
+
 @bot.command(description="Greets users")
 async def greet(ctx):
 	await ctx.send(":smiley: :wave: Hello, there "+ctx.message.author.mention)
