@@ -172,14 +172,18 @@ async def announce(ctx, *args):
 async def say(ctx, *args):
 	if(Check_Admin(ctx)):
 		text = '{}'.format(' '.join(args))
-		front = text.find("{")+1		#Find channel name indices
-		back = text.find("}")
-		if text.find("{") == back:			#Verify user input channel name
-			await ctx.send("Oof bad formatting there bud. Use {channel} *announcement*")
+                frontS = text.find("[")+1               #Find server name indices
+                backS = text.find("]")
+		frontC = text.find("{")+1		#Find channel name indices
+		backC = text.find("}")
+		if text.find("{") == backC:			#Verify user input channel name
+			await ctx.send("Oof bad formatting there bud. Use [server] {channel} *text*")
+                elif text.find("[") == backS:
+
 		else:
 			textList = list(text)		
-			text = ''.join(textList[back+2:])		#Get message contents
-			channel = str(''.join(textList[front:back]))	#Get channel
+			text = ''.join(textList[backC+2:])		#Get message contents
+			channel = str(''.join(textList[frontC:backC]))	#Get channel
 			channelList = ctx.guild.text_channels		#Get list of channels
 			for i in channelList:
 				if i.name == channel:			#Find channel in channel list and save its ID
