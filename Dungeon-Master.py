@@ -179,34 +179,35 @@ async def announce(ctx, *args):
 @bot.command(name='say', description="A command to speak through the bot.")
 async def say(ctx, *args):
 	if(Check_Admin(ctx)):
-		text = '{}'.format(' '.join(args))
+                text = '{}'.format(' '.join(args))
                 frontS = text.find("[")+1               #Find server name indices
                 backS = text.find("]")
-		frontC = text.find("{")+1		#Find channel name indices
-		backC = text.find("}")
+                frontC = text.find("{")+1		#Find channel name indices
+                backC = text.find("}")
                 server = None
-		if text.find("{") == backC:			#Verify user input channel name
-			await ctx.send("Oof bad formatting there bud. Use [server] {channel} *text*")
+                if text.find("{") == backC:			#Verify user input channel name
+                        await ctx.send("Oof bad formatting there bud. Use [server] {channel} *text*")
                 elif text.find("[") == backS:
                         await ctx.send("Oof bad formatting there bud. Use [server] {channel} *text*")
-		else:
-			textList = list(text)
-			text = ''.join(textList[backC+2:])		#Get message contents
+                else:
+                	textList = list(text)
+                	text = ''.join(textList[backC+2:])		#Get message contents
                         serverName = str(''.join(textList[frontS:backS]))   #Get server
                         serverList = bot.guilds                         #Get list of servers
                         for i in serverList:
-                                if i.name == serverName:                #find the right server
-                                        server = i
-			channel = str(''.join(textList[frontC:backC]))	#Get channel
-			channelList = server.text_channels		#Get list of channels
-			for i in channelList:
-				if i.name == channel:			#Find channel in channel list and save its ID
-					channelID = i.id
-					channel = i
-			if channelID != None:				#Verify the channel was found using ID
-			        await server.channel.send(text)
-			else:
-	        		await ctx.send("You have to use a real channel duder.")
+                                    if i.name == serverName:                #find the right server
+                                            server = i
+
+            	channel = str(''.join(textList[frontC:backC]))	#Get channel
+	        channelList = server.text_channels		#Get list of channels
+        	for i in channelList:
+	        	if i.name == channel:			#Find channel in channel list and save its ID
+		        	channelID = i.id
+			        channel = i
+        	if channelID != None:				#Verify the channel was found using ID
+	                await server.channel.send(text)
+        	else:
+	        	await ctx.send("You have to use a real channel duder.")
 
 @bot.command(description="Greets users")
 async def greet(ctx):
