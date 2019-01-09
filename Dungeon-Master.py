@@ -109,12 +109,6 @@ async def on_ready():
 	print(bot.user.id)
 	print('------')
 
-@bot.event
-async def on_message(ctx, *args):
-        if(debugMode):
-                text = '{}'.format(' '.join(args))
-                print(text)
-
 @bot.command()
 async def info(ctx):
 	embed = discord.Embed(title="Dungeon-Master", description="Use this bot for making dice rolls, doing math, creating straw polls, answering questions, or to bug Jeremy to add more features.\nLook at the full write up with !help or on Github at https://github.com/JeremyEudy/Dungeon-Master-Bot", color=0xeee657)
