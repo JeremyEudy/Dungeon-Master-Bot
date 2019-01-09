@@ -195,19 +195,19 @@ async def say(ctx, *args):
                         serverName = str(''.join(textList[frontS:backS]))   #Get server
                         serverList = bot.guilds                         #Get list of servers
                         for i in serverList:
-                                    if i.name == serverName:                #find the right server
-                                            server = i
+                                if i.name == serverName:                #find the right server
+                                        server = i
 
-            	channel = str(''.join(textList[frontC:backC]))	#Get channel
-	        channelList = server.text_channels		#Get list of channels
-        	for i in channelList:
-	        	if i.name == channel:			#Find channel in channel list and save its ID
-		        	channelID = i.id
-			        channel = i
-        	if channelID != None:				#Verify the channel was found using ID
-	                await server.channel.send(text)
-        	else:
-	        	await ctx.send("You have to use a real channel duder.")
+                channel = str(''.join(textList[frontC:backC]))	#Get channel
+                channelList = server.text_channels		#Get list of channels
+                for i in channelList:
+                        if i.name == channel:			#Find channel in channel list and save its ID
+                                channelID = i.id
+                                channel = i
+                if channelID != None:				#Verify the channel was found using ID
+                        await server.channel.send(text)
+                else:
+                        await ctx.send("You have to use a real channel duder.")
 
 @bot.command(description="Greets users")
 async def greet(ctx):
