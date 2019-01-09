@@ -25,6 +25,8 @@ import requests
 import youtube_dl
 from roller import *
 
+debugMode = True
+
 BOT_PREFIX = ("/")
 f = open('Token.txt', 'r')	#Find token
 TOKEN = f.read().rstrip()
@@ -106,6 +108,12 @@ async def on_ready():
 	print(bot.user.name)
 	print(bot.user.id)
 	print('------')
+
+@bot.event
+async def on_message(ctx, *args):
+        if(debugMode):
+                text = '{}'.format(' '.join(args))
+                print(text)
 
 @bot.command()
 async def info(ctx):
