@@ -190,8 +190,8 @@ async def say(ctx, *args):
                 elif text.find("[") == backS:
                         await ctx.send("Oof bad formatting there bud. Use [server] {channel} *text*")
                 else:
-                	textList = list(text)
-                	text = ''.join(textList[backC+2:])		#Get message contents
+                        textList = list(text)
+                        text = ''.join(textList[backC+2:])		#Get message contents
                         serverName = str(''.join(textList[frontS:backS]))   #Get server
                         serverList = bot.guilds                         #Get list of servers
                         for i in serverList:
