@@ -355,8 +355,8 @@ async def stats(ctx):
                 stat.pop(stat.index(lowest))
                 lowest = min(stat)
                 stat.pop(stat.index(lowest))
-                stat = sum(stat)
-                rolls.append(str(stat))
+                statFinal = str(sum(stat))
+                rolls.append(statFinal)
 
         rollString = rolls[0]+" "+rolls[1]+" "+rolls[2]+" "+rolls[3]+" "+rolls[4]+" "+rolls[5]
         await ctx.send("Here's your stats "+ctx.message.author.mention+":\n"+rollString)
