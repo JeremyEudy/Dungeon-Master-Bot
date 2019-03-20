@@ -347,16 +347,19 @@ async def r(ctx, *args):
 @bot.command(name='stats', description="Generates a list of DnD character stats (/r 6(6d4kh3)).", aliases=['rollstats', 'rstats'])
 async def stats(ctx):
         rolls = []
-        for i in range (0,6):
-                roll = ' '.join([str(item) for item in transmogrifier(["6d4"])])
-                rolls.append(int(eval(roll)))
-        #Get rid of the 2 lowest since we keep the highest 4
-        lowest = min(rolls)
-        rolls.pop(rolls.index(lowest))
-        lowest = min(rolls)
-        rolls.pop(rolls.index(lowest))
-        rollString = str(rolls[0])+" "+str(rolls[1])+" "+str(rolls[2])+" "+str(rolls[3])
-        await ctx.send("Here's your stats"+ctx.message.author.mention+":\n"+rollString)
+        stat = []
+        for i in range(0, 6):
+                for j in range(0, 6):
+                        stat.append(random.randint(1, 6))
+                lowest = min(stat)
+                stat.pop(stat.index(lowest))
+                lowest = min(stat)
+                stat.pop(stat.index(lowest))
+                stat = sum(stat)
+                rolls.append(str(stat))
+
+        rollString = rolls[0]+" "+rolls[1]+" "+rolls[2]+" "+rolls[3]+" "+rolls[4]+" "+rolls[5]
+        await ctx.send("Here's your stats "+ctx.message.author.mention+":\n"+rollString)
 
 @bot.command(name='8ball', description="Answers a yes/no question.", aliases=['eightball', '8-ball', 'eight_ball'])
 async def eightball(ctx, *args):
