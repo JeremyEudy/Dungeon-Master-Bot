@@ -355,7 +355,7 @@ async def stats(ctx):
         rolls.pop(rolls.index(lowest))
         lowest = min(rolls)
         rolls.pop(rolls.index(lowest))
-        rollString = str(rolls[0]+" "+rolls[1]+" "+rolls[2]+" "+rolls[3])
+        rollString = str(rolls[0])+" "+str(rolls[1])+" "+str(rolls[2])+" "+str(rolls[3])
         await ctx.send("Here's your stats"+ctx.message.author.mention+":\n"+rollString)
 
 @bot.command(name='8ball', description="Answers a yes/no question.", aliases=['eightball', '8-ball', 'eight_ball'])
