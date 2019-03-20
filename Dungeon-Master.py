@@ -340,7 +340,7 @@ async def r(ctx, *args):
 	roll = ' '.join([str(item) for item in transmogrifier(roll)])		#Pass clean input into Will's code
 	rollString = str(roll)
 	try:
-		await ctx.send(ctx.message.author.mention+": `"+rollString+"` = "+str(eval(roll)))
+                await ctx.send(ctx.message.author.mention+": `"+rollString+"` = "+str(eval(roll)))
         except Exception as e:
 		await ctx.send(ctx.message.author.mention+": "+random.choice(british_insults))
 
