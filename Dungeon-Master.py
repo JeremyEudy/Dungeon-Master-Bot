@@ -342,7 +342,7 @@ async def r(ctx, *args):
 	try:
                 await ctx.send(ctx.message.author.mention+": `"+rollString+"` = "+str(eval(roll)))
         except Exception as e:
-		await ctx.send(ctx.message.author.mention+": "+random.choice(british_insults))
+                await ctx.send(ctx.message.author.mention+": "+random.choice(british_insults))
 
 @bot.command(name='stats', description="Generates a list of DnD character stats (/r 6(6d4kh3)).", aliases=['rollstats', 'rstats'])
 async def stats(ctx):
