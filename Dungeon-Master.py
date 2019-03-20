@@ -352,9 +352,9 @@ async def stats(ctx):
                 rolls.append(int(eval(roll)))
         #Get rid of the 2 lowest since we keep the highest 4
         lowest = min(rolls)
-        rolls.pop(rolls.indexOf(lowest))
+        rolls.pop(rolls.index(lowest))
         lowest = min(rolls)
-        rolls.pop(rolls.indexOf(lowest))
+        rolls.pop(rolls.index(lowest))
         rollString = str(rolls[0]+" "+rolls[1]+" "+rolls[2]+" "+rolls[3])
         await ctx.send("Here's your stats"+ctx.message.author.mention+":\n"+rollString)
 
