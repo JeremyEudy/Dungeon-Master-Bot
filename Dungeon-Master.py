@@ -355,6 +355,8 @@ async def stats(ctx):
                 stat.pop(stat.index(lowest))
                 lowest = min(stat)
                 stat.pop(stat.index(lowest))
+                lowest = min(stat)
+                stat.pop(stat.index(lowest))
                 statFinal = str(sum(stat))
                 rolls.append(statFinal)
 
