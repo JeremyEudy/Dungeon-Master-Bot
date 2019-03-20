@@ -349,7 +349,7 @@ async def stats(ctx):
         rolls = []
         for i in range (0,6):
                 roll = ' '.join([str(item) for item in transmogrifier(["6d4"])])
-                rolls.append(int(roll))
+                rolls.append(int(eval(roll)))
         #Get rid of the 2 lowest since we keep the highest 4
         lowest = min(rolls)
         rolls.pop(lowest)
