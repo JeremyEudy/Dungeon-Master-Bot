@@ -347,8 +347,8 @@ async def r(ctx, *args):
 @bot.command(name='stats', description="Generates a list of DnD character stats (/r 6(6d4kh3)).", aliases=['rollstats', 'rstats'])
 async def stats(ctx):
         rolls = []
-        stat = []
         for i in range(0, 6):
+                stat = []
                 for j in range(0, 6):
                         stat.append(random.randint(1, 6))
                 lowest = min(stat)
