@@ -328,7 +328,7 @@ async def m(ctx, *args):
 	else:
 		await ctx.send(ctx.message.author.mention+" don't divide by 0!")
 
-@bot.command(name='r', description="A basic port of Will's roller program that essentially recreates his __main__ class and sends the output")
+@bot.command(name='r', description="A basic port of Will's roller program that essentially recreates his __main__ class and sends the output", aliases=['roll'])
 async def r(ctx, *args):
 	roll = '{}'.format(''.join(args))
 	ops = ['+','-','*','/']
@@ -341,8 +341,22 @@ async def r(ctx, *args):
 	rollString = str(roll)
 	try:
 		await ctx.send(ctx.message.author.mention+": `"+rollString+"` = "+str(eval(roll)))
-	except Exception as e:
+        except Exception as e:
 		await ctx.send(ctx.message.author.mention+": "+random.choice(british_insults))
+
+@bot.command(name='stats', description="Generates a list of DnD character stats (/r 6(6d4kh3)).", aliases=['rollstats', 'rstats'])
+async def stats(ctx):
+        rolls = []
+        for i in range (0,6):
+                roll = ' '.join([str(item) for item in transmogrifier("6d4")])
+                rolls.append(roll)
+        #Get rid of the 2 lowest since we keep the highest 4
+        lowest = min(rolls)
+        rolls.pop(lowest)
+        lowest = min(rolls)
+        rolls.pop(lowest)
+        rollString = str(rolls[0])+" "+rolls[1]+" "+rolls[2]+" "+rolls[3])
+        await ctx.send("Here's your stats"+ctx.message.author.mention+":\n"+rollString)
 
 @bot.command(name='8ball', description="Answers a yes/no question.", aliases=['eightball', '8-ball', 'eight_ball'])
 async def eightball(ctx, *args):
