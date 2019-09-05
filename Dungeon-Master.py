@@ -25,6 +25,8 @@ import requests
 import youtube_dl
 from roller import *
 
+debugMode = True
+
 BOT_PREFIX = ("/")
 f = open('Token.txt', 'r')	#Find token
 TOKEN = f.read().rstrip()
@@ -171,24 +173,35 @@ async def announce(ctx, *args):
 @bot.command(name='say', description="A command to speak through the bot.")
 async def say(ctx, *args):
 	if(Check_Admin(ctx)):
-		text = '{}'.format(' '.join(args))
-		front = text.find("{")+1		#Find channel name indices
-		back = text.find("}")
-		if text.find("{") == back:			#Verify user input channel name
-			await ctx.send("Oof bad formatting there bud. Use {channel} *announcement*")
-		else:
-			textList = list(text)		
-			text = ''.join(textList[back+2:])		#Get message contents
-			channel = str(''.join(textList[front:back]))	#Get channel
-			channelList = ctx.guild.text_channels		#Get list of channels
-			for i in channelList:
-				if i.name == channel:			#Find channel in channel list and save its ID
-					channelID = i.id
-					channel = i
-			if channelID != None:				#Verify the channel was found using ID
-			        await channel.send(text)
-			else:
-	        		await ctx.send("You have to use a real channel duder.")
+                text = '{}'.format(' '.join(args))
+                frontS = text.find("[")+1               #Find server name indices
+                backS = text.find("]")
+                frontC = text.find("{")+1		#Find channel name indices
+                backC = text.find("}")
+                server = None
+                if text.find("{") == backC:			#Verify user input channel name
+                        await ctx.send("Oof bad formatting there bud. Use [server] {channel} *text*")
+                elif text.find("[") == backS:
+                        await ctx.send("Oof bad formatting there bud. Use [server] {channel} *text*")
+                else:
+                        textList = list(text)
+                        text = ''.join(textList[backC+2:])		#Get message contents
+                        serverName = str(''.join(textList[frontS:backS]))   #Get server
+                        serverList = bot.guilds                         #Get list of servers
+                        for i in serverList:
+                                if i.name == serverName:                #find the right server
+                                        server = i
+
+                channel = str(''.join(textList[frontC:backC]))	#Get channel
+                channelList = server.text_channels		#Get list of channels
+                for i in channelList:
+                        if i.name == channel:			#Find channel in channel list and save its ID
+                                channelID = i.id
+                                channel = i
+                if channelID != None:				#Verify the channel was found using ID
+                        await server.channel.send(text)
+                else:
+                        await ctx.send("You have to use a real channel duder.")
 
 @bot.command(description="Greets users")
 async def greet(ctx):
@@ -315,7 +328,7 @@ async def m(ctx, *args):
 	else:
 		await ctx.send(ctx.message.author.mention+" don't divide by 0!")
 
-@bot.command(name='r', description="A basic port of Will's roller program that essentially recreates his __main__ class and sends the output")
+@bot.command(name='r', description="A basic port of Will's roller program that essentially recreates his __main__ class and sends the output", aliases=['roll'])
 async def r(ctx, *args):
 	roll = '{}'.format(''.join(args))
 	ops = ['+','-','*','/']
@@ -327,9 +340,28 @@ async def r(ctx, *args):
 	roll = ' '.join([str(item) for item in transmogrifier(roll)])		#Pass clean input into Will's code
 	rollString = str(roll)
 	try:
-		await ctx.send(ctx.message.author.mention+": `"+rollString+"` = "+str(eval(roll)))
+                await ctx.send(ctx.message.author.mention+": `"+rollString+"` = "+str(eval(roll)))
 	except Exception as e:
 		await ctx.send(ctx.message.author.mention+": "+random.choice(british_insults))
+
+@bot.command(name='stats', description="Generates a list of DnD character stats (/r 6(6d4kh3)).", aliases=['rollstats', 'rstats'])
+async def stats(ctx):
+        rolls = []
+        for i in range(0, 6):
+                stat = []
+                for j in range(0, 6):
+                        stat.append(random.randint(1, 6))
+                lowest = min(stat)
+                stat.pop(stat.index(lowest))
+                lowest = min(stat)
+                stat.pop(stat.index(lowest))
+                lowest = min(stat)
+                stat.pop(stat.index(lowest))
+                statFinal = str(sum(stat))
+                rolls.append(statFinal)
+
+        rollString = rolls[0]+" "+rolls[1]+" "+rolls[2]+" "+rolls[3]+" "+rolls[4]+" "+rolls[5]
+        await ctx.send("Here's your stats "+ctx.message.author.mention+":\n"+rollString)
 
 @bot.command(name='8ball', description="Answers a yes/no question.", aliases=['eightball', '8-ball', 'eight_ball'])
 async def eightball(ctx, *args):
