@@ -11,6 +11,11 @@ YourID.txt
 #######################
 roller.py
 Dice-Roller/
+Dice-Roller/*
 __pycache__/
+__pycache__/*
 *.swp
 CustomData/
+CustomData/*
+roller/
+roller/*
