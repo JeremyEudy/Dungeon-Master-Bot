@@ -4,15 +4,12 @@ A discord bot used for server administration, making dicerolls, strawpolls, doin
 ## Getting Started
 Easy clone:
 ```
-mkdir -p ~/Dungeon-Master-Bot/ && cd
 git clone https://github.com/JeremyEudy/Dungeon-Master-Bot
 ```
-Or replace ~/Dungeon-Master-Bot with a different valid location.
 
 ## Install Dependencies
 To setup this bot, run the setup.sh script:
 ```
-chmod +x setup.sh
 sudo ./setup.sh
 ```
 This will install all dependencies for the bot. The dependencies are as listed below:
@@ -26,7 +23,7 @@ This will install all dependencies for the bot. The dependencies are as listed b
 - Dice-Roller
 
 ## Setup
-You must generate a token for this bot in order to implement it in your server. The token must be kept secret, so it will not be included in this repo. Add the token as the only line in a .txt file named ```Token.txt``` and place it in the same directory as ```Dungeon-Master-Bot.py```
+You must generate a token for this bot in order to implement it in your server. The token must be kept secret, so it will not be included in this repo. During install, ```setup.sh``` will ask you for your token and generate a file where it's kept for reference by the bot.
 
 Some commands are restricted to admin only based on the user's role. In order to access these commands, create a `.txt` file in `CustomData/` called `ServerName_AdminRole.txt` (you must type your server name exactly the way it appears in discord), containing the name of the admin role for your server.
 
