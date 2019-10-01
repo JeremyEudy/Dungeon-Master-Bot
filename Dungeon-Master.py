@@ -27,12 +27,13 @@ from roller import *
 
 debugMode = True
 
+PATH = '/home/jeremy/Dungeon-Master-Bot/'
 BOT_PREFIX = ("/")
-f = open('Token.txt', 'r')	#Find token
+f = open(PATH+'Token.txt', 'r')	#Find token
 TOKEN = f.read().rstrip()
 f.close()
 
-f = open("YourID.txt", "r")
+f = open(PATH+"YourID.txt", "r")
 OwnerID = int(f.read().rstrip())
 f.close()
 
@@ -40,7 +41,7 @@ f.close()
 def Check_Admin(ctx):
 	server = str(ctx.guild.name)
 	try:
-		fileInfo = "CustomData/"+server+"_AdminRole.txt"	#This file must be created by you
+		fileInfo = PATH+"CustomData/"+server+"_AdminRole.txt"	#This file must be created by you
 		f = open(fileInfo, "r")
 		roleName = str(f.read().rstrip())
 		if roleName in [i.name for i in ctx.author.roles]:
@@ -220,7 +221,7 @@ async def on_member_join(member):
 	#Greets new users in the default channel, and gives them the default role (if both are set)
 	server = str(member.guild.name)
 	try:
-		fileInfo = "CustomData/"+server+"_DefaultChannel.txt"
+		fileInfo = PATH+"CustomData/"+server+"_DefaultChannel.txt"
 		f = open(fileInfo, "r")
 		channel = str(f.read().rstrip())	#Get channel name
 		f.close()
@@ -234,7 +235,7 @@ async def on_member_join(member):
 	except:
 		pass
 	try:
-		fileInfo = "CustomData/"+server+"_DefaultRole.txt"
+		fileInfo = PATH+"CustomData/"+server+"_DefaultRole.txt"
 		f = open(fileInfo, "r")
 		roleName = str(f.read().rstrip())	#Get role name
 		role = discord.utils.get(member.guild.roles, name=roleName)	#Find the role object that has that name
@@ -248,7 +249,7 @@ async def DefaultRole(ctx, *args):
 	if(Check_Admin(ctx)):
 		text = '{}'.format(' '.join(args))
 		server = str(ctx.guild.name)
-		fileInfo = "CustomData/"+server+"_DefaultRole.txt"
+		fileInfo = PATH+"CustomData/"+server+"_DefaultRole.txt"
 		f = open(fileInfo, "w")
 		f.write(text)				#Generates a file containing the default role for your server
 		await ctx.send("The default role is now "+text)
@@ -259,7 +260,7 @@ async def DefaultChannel(ctx, *args):
 	if(Check_Admin(ctx)):
 		text = '{}'.format(' '.join(args))
 		server = str(ctx.guild.name)
-		fileInfo = "CustomData/"+server+"_DefaultChannel.txt"
+		fileInfo = PATH+"CustomData/"+server+"_DefaultChannel.txt"
 		f = open(fileInfo, "w")
 		f.write(text)			#Generates a file containing the default channel for your server
 		await ctx.send("The default channel is now "+text)
@@ -286,7 +287,7 @@ async def suggest(ctx, *args):
 	counter = 0
 	suggestion = '{}'.format(' '.join(args))		#Get input in suggestion
 	server = str(ctx.guild.name)			#Get server name
-	suggestionFile = "CustomData/"+server+"_SuggestionBox.txt"	#Construct file name based on server name
+	suggestionFile = PATH+"CustomData/"+server+"_SuggestionBox.txt"	#Construct file name based on server name
 	f = open(suggestionFile, "a+")
 	for line in f:
 		if ctx.message.author.mention in line: counter+=1	#Count the number of suggestions a user has in the file
