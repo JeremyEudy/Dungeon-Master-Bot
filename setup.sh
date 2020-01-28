@@ -42,5 +42,23 @@ read token
 echo $token > Token.txt
 
 echo "-------------------------------------------------------------------------------"
+echo "${BLUE}Paste your Discord UID here:${NC}"
+echo "-------------------------------------------------------------------------------"
+read UID
+echo $UID > YourID.txt
+
+echo "-------------------------------------------------------------------------------"
+echo "${BLUE}Do you want to register the bot as a system service?${NC}"
+echo "-------------------------------------------------------------------------------"
+echo "1 - Yes"
+echo "2 - No"
+read answer
+if [ $answer -eq 1 ]
+then
+    cp DungeonMaster.service /lib/systemd/system/
+    cp -r . /usr/bin/Dungeon-Master-Bot/
+fi
+
+echo "-------------------------------------------------------------------------------"
 echo "${GREEN}Install complete.${NC}"
 echo "-------------------------------------------------------------------------------"
