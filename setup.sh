@@ -38,7 +38,7 @@ if [ $answer -eq 1 ]
 then
     cp DungeonMaster.service /lib/systemd/system/
     cd ..
-    mv Dungeon-Master-Bot/ /usr/bin/Dungeon-Master-Bot/
+    sudo mv Dungeon-Master-Bot/ /usr/bin/Dungeon-Master-Bot/
     cd /usr/bin/Dungeon-Master-Bot/
     sudo systemctl enable DungeonMaster.service
     sudo systemctl daemon-reload
