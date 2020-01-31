@@ -27,13 +27,28 @@ sudo python3.6 -m pip install --upgrade youtube-dl
 sudo python3.6 -m pip install opuslib
 git clone https://github.com/Upgwades/Dice-Roller || mv Dice-Roller roller
 mv roller/roller.py .
+
+echo "-------------------------------------------------------------------------------"
+echo "${BLUE}Do you want to register the bot as a system service?${NC}"
+echo "-------------------------------------------------------------------------------"
+echo "1 - Yes"
+echo "2 - No"
+read answer
+if [ $answer -eq 1 ]
+then
+    cp DungeonMaster.service /lib/systemd/system/
+    cd ..
+    mv Dungeon-Master-Bot/ /usr/bin/Dungeon-Master-Bot/
+    cd /usr/bin/Dungeon-Master-Bot/
+fi
+
 echo "-------------------------------------------------------------------------------"
 echo "${BLUE}Creating directories and fixing paths${NC}"
 echo "-------------------------------------------------------------------------------"
 mkdir -p CustomData/
 mkdir -p CustomData/Images/
 
-sed -i -e 's@PATH = "/home/jeremy/Dungeon-Master-Bot/"@PATH = "'$PWD'/"@g' Dungeon-Master.py
+sed -i -e 's@PATH = "/usr/bin/Dungeon-Master-Bot/"@PATH = "'$PWD'/"@g' Dungeon-Master.py
 
 echo "-------------------------------------------------------------------------------"
 echo "${BLUE}Paste your token here:${NC}"
@@ -46,18 +61,6 @@ echo "${BLUE}Paste your Discord UID here:${NC}"
 echo "-------------------------------------------------------------------------------"
 read UID
 echo $UID > YourID.txt
-
-echo "-------------------------------------------------------------------------------"
-echo "${BLUE}Do you want to register the bot as a system service?${NC}"
-echo "-------------------------------------------------------------------------------"
-echo "1 - Yes"
-echo "2 - No"
-read answer
-if [ $answer -eq 1 ]
-then
-    cp DungeonMaster.service /lib/systemd/system/
-    cp -r . /usr/bin/Dungeon-Master-Bot/
-fi
 
 echo "-------------------------------------------------------------------------------"
 echo "${GREEN}Install complete.${NC}"

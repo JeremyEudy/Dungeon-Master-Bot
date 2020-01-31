@@ -27,7 +27,7 @@ from roller import *
 
 debugMode = True
 
-PATH = "/home/jeremy/Dungeon-Master-Bot/"
+PATH = "/usr/bin/Dungeon-Master-Bot/"
 BOT_PREFIX = ("/")
 f = open(PATH+'Token.txt', 'r')	#Find token
 TOKEN = f.read().rstrip()
