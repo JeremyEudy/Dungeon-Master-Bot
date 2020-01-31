@@ -40,6 +40,8 @@ then
     cd ..
     mv Dungeon-Master-Bot/ /usr/bin/Dungeon-Master-Bot/
     cd /usr/bin/Dungeon-Master-Bot/
+    sudo systemctl enable DungeonMaster.service
+    sudo systemctl daemon-reload
 fi
 
 echo "-------------------------------------------------------------------------------"
