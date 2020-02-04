@@ -5,6 +5,8 @@ Conflicts=getty@tty1.service
 
 [Service]
 Type=simple
+Restart=one-failure
+RestartSec=3
 ExecStart=/usr/bin/python3.6 /usr/bin/Dungeon-Master-Bot/Dungeon-Master.py
 StandardInput=tty-force
 
