@@ -16,15 +16,15 @@ BLUE='\033[0;34m'
 NC='\033[0m'
 
 echo "-------------------------------------------------------------------------------"
-echo "${BLUE}Make sure you have Python 3.6 installed.${NC}"
+echo "${BLUE}Make sure you have Python 3 installed.${NC}"
 echo "-------------------------------------------------------------------------------"
-sudo python3.6 -m pip install aiohttp
-sudo python3.6 -m pip install py_expression_eval
-sudo python3.6 -m pip install -U https://github.com/Rapptz/discord.py/archive/rewrite.zip
-sudo python3.6 -m pip install strawpoll.py
-sudo python3.6 -m pip install asyncio
-sudo python3.6 -m pip install --upgrade youtube-dl
-sudo python3.6 -m pip install opuslib
+sudo python3 -m pip install aiohttp
+sudo python3 -m pip install py_expression_eval
+sudo python3 -m pip install -U https://github.com/Rapptz/discord.py/archive/rewrite.zip
+sudo python3 -m pip install strawpoll.py
+sudo python3 -m pip install asyncio
+sudo python3 -m pip install --upgrade youtube-dl
+sudo python3 -m pip install opuslib
 git clone https://github.com/Upgwades/Dice-Roller || mv Dice-Roller roller
 mv roller/roller.py .
 
