@@ -6,24 +6,18 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2021/01/04 22:21:08 by jeremy         |                   | Y    #
+#    Updated: 2021/09/05 20:49:18 by jeremy         |                   | Y    #
 #                                                                              #
 # **************************************************************************** #
 
-import re
-import operator as op
-import random
-import asyncio
-import aiohttp
-from py_expression_eval import Parser
-import discord
 from discord.ext.commands import Bot
 from discord.ext import commands
 from discord.voice_client import VoiceClient
-import strawpoll
-import requests
-import youtube_dl
+from py_expression_eval import Parser
+from emojifier import Emojifier
 from roller import *
+import operator as op
+import re, random, asyncio, aiohttp, discord, strawpoll, requests, youtube_dl
 
 debugMode = True
 
@@ -130,6 +124,7 @@ async def help(ctx):
         embed = discord.Embed(title="Dungeon-Master", description="This bot does some stuff, here's a list:", color=0xeee657)
         embed.add_field(name="/greet", value="Greets the user", inline=False)
         embed.add_field(name="/sponge", value="SpOnGe", inline=False)
+        embed.add_field(name="/emojify", value="Take any text and make it `d a n k` 😎", inline=False)
         embed.add_field(name="/shrug", value=" ¯\_(ツ)_/¯", inline=False)
         embed.add_field(name="/m X + Y + Z", value="Solves a math problem of any length (addition, subtraction, multiplication, division).\nAlso able to solve more advanced math. A comprehensive list is available at https://github.com/AxiaCore/py-expression-eval", inline=False)
         embed.add_field(name="/r iDj+math", value="Roll i dice with j sides, then perform arithmetic with the results.\nCredit for this function goes to Will Irwin (Upgwades) https://github.com/Upgwades", inline=False)
@@ -155,7 +150,7 @@ async def help(ctx):
 @bot.command(name='announce', description="A command to send an announcement to a specified channel (it doesn't abuse @everyone)")
 async def announce(ctx, *args):
         if(Check_Admin(ctx)):
-                text = '{}'.format(' '.join(args))
+                text = ' '.join(args)
                 front = text.find("{")+1                #Find channel name indices
                 back = text.find("}")
                 if text.find("{") == back:                      #Verify user input channel name
@@ -179,7 +174,7 @@ async def announce(ctx, *args):
 @bot.command(name='say', description="A command to speak through the bot.")
 async def say(ctx, *args):
         if(Check_Admin(ctx)):
-                text = '{}'.format(' '.join(args))
+                text = ' '.join(args)
                 frontS = text.find("[")+1               #Find server name indices
                 backS = text.find("]")
                 frontC = text.find("{")+1               #Find channel name indices
@@ -252,7 +247,7 @@ async def on_member_join(member):
 @bot.command(name='DefaultRole', description="A command to set the default role given to new members upon joining a server.")
 async def DefaultRole(ctx, *args):
         if(Check_Admin(ctx)):
-                text = '{}'.format(' '.join(args))
+                text = ' '.join(args)
                 server = str(ctx.guild.name)
                 fileInfo = PATH+"CustomData/"+server+"_DefaultRole.txt"
                 f = open(fileInfo, "w")
@@ -263,7 +258,7 @@ async def DefaultRole(ctx, *args):
 @bot.command(name='DefaultChannel', description="A command to set the default channel for the server.")
 async def DefaultChannel(ctx, *args):
         if(Check_Admin(ctx)):
-                text = '{}'.format(' '.join(args))
+                text = ' '.join(args)
                 server = str(ctx.guild.name)
                 fileInfo = PATH+"CustomData/"+server+"_DefaultChannel.txt"
                 f = open(fileInfo, "w")
@@ -273,7 +268,7 @@ async def DefaultChannel(ctx, *args):
 
 @bot.command(description="Returns a string with alternating case.")
 async def sponge(ctx, *args):
-        text = '{}'.format(' '.join(args))
+        text = ' '.join(args)
         text = list(text)
         for i in range(0, len(text)):           #Iterates through text and changes every other characters case
                 if i%2:
@@ -287,10 +282,17 @@ async def sponge(ctx, *args):
         except:
                 await ctx.send(text)
 
+@bot.command(name='emojify', description="Takes any string and makes it `d a n k` 😎")
+async def emojify(ctx, *args):
+        message = ' '.join(args)
+        emoji = Emojifier.of_default_mappings()
+        emojify = emoji.generate_emojipasta(text=message)
+        await ctx.send(ctx.message.author.mention+': '+emojify)
+
 @bot.command()
 async def suggest(ctx, *args):
         counter = 0
-        suggestion = '{}'.format(' '.join(args))                #Get input in suggestion
+        suggestion = ' '.join(args)                #Get input in suggestion
         server = str(ctx.guild.name)                    #Get server name
         suggestionFile = PATH+"CustomData/"+server+"_SuggestionBox.txt" #Construct file name based on server name
         f = open(suggestionFile, "a+")
@@ -318,7 +320,7 @@ async def play(ctx, url):
 @bot.command()
 async def m(ctx, *args):
         #Gets and cleans input from user and passes it to py-expression-eval parser
-        _input = '{}'.format(''.join(args))
+        _input = ''.join(args)
         #Check for constants
         if _input=="pi":
                 _input=_input.upper()
@@ -336,7 +338,7 @@ async def m(ctx, *args):
 
 @bot.command(name='r', description="A basic port of Will's roller program that essentially recreates his __main__ class and sends the output", aliases=['roll'])
 async def r(ctx, *args):
-        roll = '{}'.format(''.join(args))
+        roll = ''.join(args)
         ops = ['+','-','*','/']
         #clean the roll input because it gets messy
         roll = roll.replace(' ','')
@@ -371,7 +373,7 @@ async def stats(ctx):
 
 @bot.command(name='8ball', description="Answers a yes/no question.", aliases=['eightball', '8-ball', 'eight_ball'])
 async def eightball(ctx, *args):
-        a = '{}'.format(' '.join(args))
+        a = ' '.join(args)
         responses = ["It is certain.", "As I see it, yes.", "It is decidedly so.", "Without a doubt.", 
                                  "Outlook good.", "Most likely", "Yes.", "Yes - definitely.", "You may rely on it.", 
                                  "Signs point to yes.", "Reply hazy, try again.", "Ask again later.", "Better not tell you now.", 
@@ -382,7 +384,7 @@ async def eightball(ctx, *args):
 
 @bot.command(name='newStrawpoll', description="A simple interface for the strawpoll.me API.", aliases=['strawpoll'])
 async def newStrawpoll(ctx, *args):
-        message = '{}'.format(''.join(args))
+        message = ''.join(args)
         #Gets the title of the poll
         first = message.find("{") + 1
         second = message.find("}")

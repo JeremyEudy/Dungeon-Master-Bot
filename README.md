@@ -40,6 +40,8 @@ This bot performs an everchanging host of functions, such as:
 - ```/sponge *string*```
   - sTrInG
   - (If you would like this to also insert a picture of mocking spongebob, then put that picture in `CustomData/Images/` and save it as `Sponge.png`)
+- ```/emojify *string*```
+  - Take any text and make it `d a n k` 😎
 - ```/shrug```
   - ¯\\_(ツ)_/¯
 - ```/m X + Y + Z```
