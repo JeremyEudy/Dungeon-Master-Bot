@@ -1,12 +1,13 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                             |\               #
+#                                                   ---------------------      #
 #    Dungeon-Master.py                              |     ______  _____ | J    #
-#                                                       |    \`  \  |  p       #
-#    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
-#                                                       |---\  \   `|  l       #
-#    Created: 2018/05/29 10:00:02 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2021/09/05 20:49:18 by jeremy         |                   | Y    #
+#                                                   |    / ____/ / ___/ | E    #
+#    By: jeremy <jeremyeudy@gmail.com>              |   / / __  / /_    | R    #
+#                                                   |  / /_/ / / __/    | E    #
+#    Created: 2018/05/29 10:00:02 by jeremy         | /_____/ /_/       | M    #
+#    Updated: 2021/09/06 00:39:12 by jeremy         |                   | Y    #
+#                                                   ---------------------      #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +23,7 @@ import re, random, asyncio, aiohttp, discord, strawpoll, requests, youtube_dl
 debugMode = True
 
 PATH = "/usr/bin/Dungeon-Master-Bot/"
-BOT_PREFIX = ("/")
+BOT_PREFIX = ("!")
 f = open(PATH+'Token.txt', 'r') #Find token
 TOKEN = f.read().rstrip()
 f.close()
@@ -117,23 +118,23 @@ async def info(ctx):
         embed.add_field(name="Invite", value="https://discordapp.com/api/oauth2/authorize?client_id=458438661378277379&permissions=36849728&scope=bot")
         await ctx.send(embed=embed)
 
-bot.remove_command('help')      #Required to insert our own
+bot.remove_command('help')      #Required to insert my own
 @bot.command()
 async def help(ctx):
         #Prints an embedded message describing all the features of the bot
         embed = discord.Embed(title="Dungeon-Master", description="This bot does some stuff, here's a list:", color=0xeee657)
-        embed.add_field(name="/greet", value="Greets the user", inline=False)
-        embed.add_field(name="/sponge", value="SpOnGe", inline=False)
-        embed.add_field(name="/emojify", value="Take any text and make it `d a n k` 😎", inline=False)
-        embed.add_field(name="/shrug", value=" ¯\_(ツ)_/¯", inline=False)
-        embed.add_field(name="/m X + Y + Z", value="Solves a math problem of any length (addition, subtraction, multiplication, division).\nAlso able to solve more advanced math. A comprehensive list is available at https://github.com/AxiaCore/py-expression-eval", inline=False)
-        embed.add_field(name="/r iDj+math", value="Roll i dice with j sides, then perform arithmetic with the results.\nCredit for this function goes to Will Irwin (Upgwades) https://github.com/Upgwades", inline=False)
-        embed.add_field(name="/8ball *question*", value="Ask the bot a yes/no question that it will answer with advanced machine learning (or random choices).", inline=False)
-        embed.add_field(name="/strawpoll {title} [Option 1] [Option 2] [Option 3] [Option n]", value="Generates a strawpoll based on the given options. Allows more than one choice, and only one vote per user.", inline=False)
-        embed.add_field(name="/suggest *suggestion*", value="Submit a suggestion to a suggestion box. Jeremy checks the box once a week.", inline=False)
-        embed.add_field(name="/ping", value="Returns the latency of the bot.", inline=False)
-        embed.add_field(name="/info", value="Gives information about the bot.", inline=False)
-        embed.add_field(name="/help", value="You're lookin' at it.", inline=False)
+        embed.add_field(name="!greet", value="Greets the user", inline=False)
+        embed.add_field(name="!sponge", value="SpOnGe", inline=False)
+        embed.add_field(name="!emojify", value="Take any text and make it `d a n k` 😎", inline=False)
+        embed.add_field(name="!shrug", value=" ¯\_(ツ)_/¯", inline=False)
+        embed.add_field(name="!m X + Y + Z", value="Solves a math problem of any length (addition, subtraction, multiplication, division).\nAlso able to solve more advanced math. A comprehensive list is available at https://github.com/AxiaCore/py-expression-eval", inline=False)
+        embed.add_field(name="!r iDj+math", value="Roll i dice with j sides, then perform arithmetic with the results.\nCredit for this function goes to Will Irwin (Upgwades) https://github.com/Upgwades", inline=False)
+        embed.add_field(name="!8ball *question*", value="Ask the bot a yes/no question that it will answer with advanced machine learning (or random choices).", inline=False)
+        embed.add_field(name="!strawpoll {title} [Option 1] [Option 2] [Option 3] [Option n]", value="Generates a strawpoll based on the given options. Allows more than one choice, and only one vote per user.", inline=False)
+        embed.add_field(name="!suggest *suggestion*", value="Submit a suggestion to a suggestion box. Jeremy checks the box once a week.", inline=False)
+        embed.add_field(name="!ping", value="Returns the latency of the bot.", inline=False)
+        embed.add_field(name="!info", value="Gives information about the bot.", inline=False)
+        embed.add_field(name="!help", value="You're lookin' at it.", inline=False)
         await ctx.send(embed=embed)
         if(Check_Admin(ctx)):
                 #If the user that called /help is an admin, then the bot sends them a PM with admin commands
@@ -142,9 +143,9 @@ async def help(ctx):
                         await ctx.author.create_dm()
                 channel = ctx.author.dm_channel
                 embed = discord.Embed(title="Dungeon-Master (Admin Commands)", description="Here's a secret list of commands your role can perform:", color=0xeee657)
-                embed.add_field(name="/announce {channel name} *announcement*", value="A command to send an announcement to a specified channel (it doesn't abuse @everyone)", inline=False)
-                embed.add_field(name="/DefaultChannel *channel name*", value="Sets the default posting channel for the bot.", inline=False)
-                embed.add_field(name="/DefaultRole *role name*", value="Sets the role new members get on join.", inline=False)
+                embed.add_field(name="!announce {channel name} *announcement*", value="A command to send an announcement to a specified channel (it doesn't abuse @everyone)", inline=False)
+                embed.add_field(name="!DefaultChannel *channel name*", value="Sets the default posting channel for the bot.", inline=False)
+                embed.add_field(name="!DefaultRole *role name*", value="Sets the role new members get on join.", inline=False)
                 await channel.send(embed=embed)
 
 @bot.command(name='announce', description="A command to send an announcement to a specified channel (it doesn't abuse @everyone)")
@@ -156,7 +157,7 @@ async def announce(ctx, *args):
                 if text.find("{") == back:                      #Verify user input channel name
                         await ctx.send("Oof bad formatting there bud. Use {channel} *announcement*")
                 else:
-                        textList = list(text)           
+                        textList = list(text)
                         text = ''.join(textList[back+2:])               #Get announcement
                         channel = str(''.join(textList[front:back]))    #Get channel
                         channelList = ctx.guild.text_channels           #Get list of channels
@@ -222,9 +223,9 @@ async def on_member_join(member):
         server = str(member.guild.name)
         try:
                 fileInfo = PATH+"CustomData/"+server+"_DefaultChannel.txt"
-                f = open(fileInfo, "r")
-                channel = str(f.read().rstrip())        #Get channel name
-                f.close()
+                channel = None
+                with open(fileInfo, "r") as f:
+                    channel = str(f.read().rstrip())        #Get channel name
                 channelList = member.guild.text_channels        #Get list of text channels
                 for i in channelList:                   #Iterate through channelList and find the default channel
                         if i.name == channel:
@@ -236,11 +237,14 @@ async def on_member_join(member):
                 pass
         try:
                 fileInfo = PATH+"CustomData/"+server+"_DefaultRole.txt"
-                f = open(fileInfo, "r")
-                roleName = str(f.read().rstrip())       #Get role name
-                role = discord.utils.get(member.guild.roles, name=roleName)     #Find the role object that has that name
+                roleName = None
+                with open(fileInfo, "r") as f:
+                    roleName = str(f.read().rstrip())       #Get role name
+                try:
+                    role = discord.utils.get(member.guild.roles, name=roleName)     #Find the role object that has that name
+                except:
+                    pass
                 await member.add_roles(role, atomic=True)               #Give the role to the member
-                f.close()
         except:
                 pass
 
@@ -250,10 +254,9 @@ async def DefaultRole(ctx, *args):
                 text = ' '.join(args)
                 server = str(ctx.guild.name)
                 fileInfo = PATH+"CustomData/"+server+"_DefaultRole.txt"
-                f = open(fileInfo, "w")
-                f.write(text)                           #Generates a file containing the default role for your server
+                with open(fileInfo, "w+") as f:
+                    f.write(text)                           #Generates a file containing the default role for your server
                 await ctx.send("The default role is now "+text)
-                f.close()
 
 @bot.command(name='DefaultChannel', description="A command to set the default channel for the server.")
 async def DefaultChannel(ctx, *args):
@@ -261,10 +264,9 @@ async def DefaultChannel(ctx, *args):
                 text = ' '.join(args)
                 server = str(ctx.guild.name)
                 fileInfo = PATH+"CustomData/"+server+"_DefaultChannel.txt"
-                f = open(fileInfo, "w")
-                f.write(text)                   #Generates a file containing the default channel for your server
+                with open(fileInfo, "w") as f:
+                    f.write(text)                   #Generates a file containing the default channel for your server
                 await ctx.send("The default channel is now "+text)
-                f.close()
 
 @bot.command(description="Returns a string with alternating case.")
 async def sponge(ctx, *args):
@@ -295,27 +297,14 @@ async def suggest(ctx, *args):
         suggestion = ' '.join(args)                #Get input in suggestion
         server = str(ctx.guild.name)                    #Get server name
         suggestionFile = PATH+"CustomData/"+server+"_SuggestionBox.txt" #Construct file name based on server name
-        f = open(suggestionFile, "a+")
-        for line in f:
-                if ctx.message.author.mention in line: counter+=1       #Count the number of suggestions a user has in the file
-        if counter >= 10:                                               #Make sure no one is spamming
-                await ctx.send("I think you've submitted enough suggestions for right now... Try again later.")
-        else:
-                await ctx.send("Thank you for your suggestion!")
-                f.write(ctx.message.author.mention+": "+suggestion)     #Write suggestion to file and close
-        f.close()
-
-#TODO: Fix this
-'''
-@bot.command()
-async def play(ctx, url):
-        author = ctx.message.author
-        voice_channel = author.voice_channel
-        vc = await yield from self.join_voice_channel(voice_channel)
-
-        player = await vc.create_ytdl_player(url)
-        player.start()
-'''
+        with open(suggestionFile, "a+") as f:
+            for line in f:
+                    if ctx.message.author.mention in line: counter+=1       #Count the number of suggestions a user has in the file
+            if counter >= 10:                                               #Make sure no one is spamming
+                    await ctx.send("I think you've submitted enough suggestions for right now... Try again later.")
+            else:
+                    await ctx.send("Thank you for your suggestion!")
+                    f.write(ctx.message.author.mention+": "+suggestion)     #Write suggestion to file and close
 
 @bot.command()
 async def m(ctx, *args):
