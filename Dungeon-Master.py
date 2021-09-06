@@ -6,7 +6,7 @@
 #    By: jeremy <jeremyeudy@gmail.com>              |   / / __  / /_    | R    #
 #                                                   |  / /_/ / / __/    | E    #
 #    Created: 2018/05/29 10:00:02 by jeremy         | /_____/ /_/       | M    #
-#    Updated: 2021/09/06 00:39:12 by jeremy         |                   | Y    #
+#    Updated: 2021/09/06 01:17:48 by jeremy         |                   | Y    #
 #                                                   ---------------------      #
 #                                                                              #
 # **************************************************************************** #
@@ -130,6 +130,7 @@ async def help(ctx):
         embed.add_field(name="!m X + Y + Z", value="Solves a math problem of any length (addition, subtraction, multiplication, division).\nAlso able to solve more advanced math. A comprehensive list is available at https://github.com/AxiaCore/py-expression-eval", inline=False)
         embed.add_field(name="!r iDj+math", value="Roll i dice with j sides, then perform arithmetic with the results.\nCredit for this function goes to Will Irwin (Upgwades) https://github.com/Upgwades", inline=False)
         embed.add_field(name="!8ball *question*", value="Ask the bot a yes/no question that it will answer with advanced machine learning (or random choices).", inline=False)
+        embed.add_field(name="!bootycall", value="Connects you randomly with another person looking for a good time 😘 (DISCLAIMER: I cannot verify that the other party knows you'll be calling)", inline=False)
         embed.add_field(name="!strawpoll {title} [Option 1] [Option 2] [Option 3] [Option n]", value="Generates a strawpoll based on the given options. Allows more than one choice, and only one vote per user.", inline=False)
         embed.add_field(name="!suggest *suggestion*", value="Submit a suggestion to a suggestion box. Jeremy checks the box once a week.", inline=False)
         embed.add_field(name="!ping", value="Returns the latency of the bot.", inline=False)
@@ -368,8 +369,16 @@ async def eightball(ctx, *args):
                                  "Signs point to yes.", "Reply hazy, try again.", "Ask again later.", "Better not tell you now.", 
                                  "Cannot predict now.", "Concentrate and ask again.", "Don't count on it.", "My reply is no.", 
                                  "My sources say no.", "Outlook not so good.", "Very doubtful."]
-        choice = random.randint(0, len(responses)-1)                    #Randomly pick one
-        await ctx.send(ctx.message.author.mention+": "+responses[choice])
+        await ctx.send(ctx.message.author.mention+": "+random.choice(responses))
+
+@bot.command(name='bootycall', description="Connects you randomly with another person looking for a good time 😘 (DISCLAIMER: I cannot verify that the other party knows you'll be calling)")
+async def bootycall(ctx):
+        responses = [
+                "They're into feet 😘", "Try talking about herbs",
+                "Give 'em a call, who knows what'll happen", "Remember, don't talk about the news",
+                "Make sure they're not allergic to something you love"]
+        number = "{}-{}-{}".format(random.randint(100, 1000), random.randint(100, 1000), random.randint(1000, 10000))
+        await ctx.send(ctx.message.author.mention+": **"+number+"** - "+random.choice(responses))
 
 @bot.command(name='newStrawpoll', description="A simple interface for the strawpoll.me API.", aliases=['strawpoll'])
 async def newStrawpoll(ctx, *args):

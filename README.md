@@ -29,36 +29,38 @@ Some commands are restricted to admin only based on the user's role. In order to
 
 ## Functions
 This bot performs an everchanging host of functions, such as:
-- ```/greet```
+- ```!greet```
   - The bot responds to the user with a friendly greeting.
-- ```/announce [channel] 'announcement'```<sup>†</sup>
+- ```!announce [channel] 'announcement'```<sup>†</sup>
   - The bot makes an annoncement in the referenced channel.
-- ```/defaultRole 'role'```<sup>†</sup>
+- ```!defaultRole 'role'```<sup>†</sup>
   - Sets a role to be given to users upon joining the server.
-- ```/defaultChannel 'channel'```<sup>†</sup>
+- ```!defaultChannel 'channel'```<sup>†</sup>
   - Sets the default channel for the server for generic bot messaging.
-- ```/sponge *string*```
+- ```!sponge *string*```
   - sTrInG
   - (If you would like this to also insert a picture of mocking spongebob, then put that picture in `CustomData/Images/` and save it as `Sponge.png`)
-- ```/emojify *string*```
+- ```!emojify *string*```
   - Take any text and make it `d a n k` 😎
-- ```/shrug```
+- ```!shrug```
   - ¯\\_(ツ)_/¯
-- ```/m X + Y + Z```
+- ```!m X + Y + Z```
   - The bot will perform simple to advanced math using standard arithmetic operators as well as trigonometry (in radians). A comprehensive list of functions can be found here: https://github.com/AxiaCore/py-expression-eval 
-- ```/r iDj+math```
+- ```!r iDj+math```
   - Rolls i dice with j sides, and allows the user to perform arithmetic with the result. Credit goes to [Will Irwin (Upgwades)](https://github.com/Upgwades "Will's Github")
-- ```/8ball *question*```
+- ```!8ball *question*```
   - Ask the bot a yes/no question that it will answer with advanced machine learning (or random choices).
-- ```/strawpoll {title} [Option 1] [Option 2] [Option 3] [Option n]```
+- ```!bootycall```
+  - Connects you randomly with another person looking for a good time 😘 (DISCLAIMER: I cannot verify that the other party knows you'll be calling)
+- ```!strawpoll {title} [Option 1] [Option 2] [Option 3] [Option n]```
   - Generates a strawpoll based on the title given and options listed. The poll will allow users to pick multiple options, and limits the poll to one vote per user by default.
-- ```/suggest *suggestion*```
+- ```!suggest *suggestion*```
   - Submit a suggestion to a suggestion box. The box is checked once a week.
-- ```/ping```
+- ```!ping```
   - Returns the latency of the bot.
-- ```/info```
+- ```!info```
   - Provides general information about the bot.
-- ```/help```
+- ```!help```
   - Prints this menu.
 
 <sup>†</sup>Can only be used by administrator.
